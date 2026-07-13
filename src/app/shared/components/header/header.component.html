@@ -1,0 +1,39 @@
+<header class="header" [class.scrolled]="isScrolled">
+  <div class="header__inner container-custom">
+    <a routerLink="/" class="header__logo" (click)="closeMobileMenu()">
+      <span class="header__logo-main">Ký Ức</span>
+      <span class="header__logo-sub">Studio</span>
+    </a>
+
+    <nav class="header__nav" [class.open]="isMobileMenuOpen">
+      <ul class="header__nav-list">
+        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()">Trang chủ</a></li>
+        <li><a routerLink="/pricing" routerLinkActive="active" (click)="closeMobileMenu()">Bảng giá</a></li>
+        <li><a routerLink="/gallery" routerLinkActive="active" (click)="closeMobileMenu()">Bộ sưu tập</a></li>
+        <li><a routerLink="/concepts" routerLinkActive="active" (click)="closeMobileMenu()">Concept</a></li>
+        <li><a routerLink="/support" routerLinkActive="active" (click)="closeMobileMenu()">Hỗ trợ</a></li>
+        <li><a routerLink="/policy" routerLinkActive="active" (click)="closeMobileMenu()">Chính sách</a></li>
+        <li><a routerLink="/about" routerLinkActive="active" (click)="closeMobileMenu()">Về chúng tôi</a></li>
+      </ul>
+      <div class="header__mobile-cta">
+        <a routerLink="/auth" class="header__mobile-link" (click)="closeMobileMenu()">Đăng nhập</a>
+        <a routerLink="/auth" [queryParams]="{mode: 'register'}" class="header__mobile-link" (click)="closeMobileMenu()">Đăng ký</a>
+        <a routerLink="/booking" class="btn-primary-custom" (click)="closeMobileMenu()">Đặt lịch</a>
+      </div>
+    </nav>
+
+    <div class="header__actions">
+      <a routerLink="/auth" class="header__btn header__btn--outline">Đăng nhập</a>
+      <a routerLink="/auth" [queryParams]="{mode: 'register'}" class="header__btn header__btn--dark">Đăng ký</a>
+      <a routerLink="/booking" class="header__btn header__btn--light">
+        <i class="bi bi-calendar3"></i> Đặt lịch
+      </a>
+    </div>
+
+    <button class="header__burger" [class.open]="isMobileMenuOpen" (click)="toggleMobileMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="header__overlay" [class.open]="isMobileMenuOpen" (click)="closeMobileMenu()"></div>

@@ -1,0 +1,362 @@
+/* ============================================================
+   KÝ ỨC STUDIO — Trang chủ SCSS
+   Hero Slider → Về chúng tôi → Bộ sưu tập nổi bật → CTA đặt lịch
+   ============================================================ */
+
+/* ===== 1. HERO SLIDER ===== */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__carousel {
+  position: relative;
+  height: calc(100vh - var(--header-height));
+  min-height: 460px;
+  max-height: 780px;
+}
+
+.hero__slides {
+  position: absolute;
+  inset: 0;
+}
+
+/* Crossfade between slides + slow Ken Burns zoom on the active photo */
+.hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 2.4s ease-in-out;
+
+  &.active {
+    opacity: 1;
+    z-index: 2;
+
+    .hero__img {
+      animation: heroKenBurns 9s ease-out forwards;
+    }
+  }
+}
+
+.hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+}
+
+@keyframes heroKenBurns {
+  from { transform: scale(1.02); }
+  to { transform: scale(1.1); }
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(8, 5, 3, 0.66) 0%, rgba(8, 5, 3, 0.32) 48%, rgba(8, 5, 3, 0.08) 75%);
+}
+
+.hero__content {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 3;
+  max-width: 640px;
+}
+
+.hero__eyebrow {
+  font-family: var(--font-accent);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--tint-t4);
+  margin-bottom: var(--space-md);
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-weight: 600;
+  color: var(--neutral-white);
+  line-height: 1.18;
+  margin-bottom: var(--space-lg);
+  letter-spacing: -0.01em;
+}
+
+.hero__desc {
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 460px;
+  margin-bottom: var(--space-xl);
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.hero__btn-outline {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: var(--neutral-white);
+
+  &:hover {
+    background: var(--neutral-white);
+    color: var(--brand-primary);
+  }
+}
+
+.hero__indicators {
+  position: absolute;
+  z-index: 3;
+  bottom: var(--space-xl);
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+
+  button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.7);
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &.active {
+      background: var(--neutral-white);
+      width: 24px;
+      border-radius: var(--radius-full);
+    }
+  }
+}
+
+/* ===== 2. VỀ CHÚNG TÔI ===== */
+.home-about {
+  background: var(--neutral-white);
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4xl);
+    align-items: center;
+  }
+
+  &__gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  &__photo {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &--tall {
+      aspect-ratio: 3 / 4.6;
+    }
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      margin-top: var(--space-2xl);
+    }
+  }
+
+  &__text {
+    .section-heading {
+      margin-bottom: var(--space-lg);
+
+      em {
+        font-style: italic;
+        color: var(--brand-primary);
+      }
+    }
+  }
+
+  &__desc {
+    font-size: var(--text-base);
+    line-height: 1.8;
+    color: var(--neutral-grey);
+    margin-bottom: var(--space-xl);
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-family: var(--font-body);
+    font-weight: 600;
+    color: var(--brand-primary);
+    text-decoration: none;
+    transition: gap 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &:hover {
+      gap: var(--space-md);
+    }
+  }
+}
+
+/* ===== 3. BỘ SƯU TẬP NỔI BẬT ===== */
+.home-collections {
+  background: var(--color-bg-warm);
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+  }
+
+  &__more {
+    text-align: center;
+  }
+}
+
+.home-collection-card {
+  display: block;
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-decoration: none;
+  aspect-ratio: 3 / 4;
+  opacity: 0;
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: transform var(--transition-spring), box-shadow var(--transition-spring);
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card-hover);
+
+    img { transform: scale(1.06); }
+  }
+
+  &__media {
+    position: absolute;
+    inset: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  }
+
+  &__body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    padding: var(--space-lg) var(--space-md);
+    color: var(--neutral-white);
+  }
+
+  &__icon {
+    display: block;
+    font-size: 1.25rem;
+    margin-bottom: var(--space-xs);
+    opacity: 0.9;
+  }
+
+  &__name {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin: 0 0 4px;
+    line-height: 1.25;
+  }
+
+  &__subtitle {
+    font-family: var(--font-concept-desc);
+    font-size: var(--text-xs);
+    opacity: 0.85;
+    margin: 0;
+  }
+}
+
+/* ===== 4. CTA ĐẶT LỊCH ===== */
+.home-cta {
+  background: var(--color-dark-section);
+  padding: var(--space-4xl) 0;
+
+  &__inner {
+    text-align: center;
+  }
+
+  &__eyebrow {
+    font-family: var(--font-accent);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-eyebrow-dark);
+    margin-bottom: var(--space-md);
+  }
+
+  &__heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 500;
+    color: var(--neutral-white);
+    margin-bottom: var(--space-2xl);
+    line-height: 1.25;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 992px) {
+  .home-about__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .home-about__gallery {
+    order: -1;
+  }
+
+  .home-collections__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero__content {
+    max-width: 90%;
+  }
+
+  .home-about__photo:nth-child(2),
+  .home-about__photo:nth-child(3) {
+    margin-top: 0;
+  }
+
+  .home-collections__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .home-collections__grid {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+}

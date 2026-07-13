@@ -1,0 +1,99 @@
+<section class="contact-section section--lg" id="contact-form">
+  <div class="container-custom">
+    <div class="contact-section__grid">
+      <div class="contact-section__content">
+        <h2 class="contact-section__title">
+          Câu chuyện của bạn<br />
+          <em>bắt đầu ở đây</em>
+        </h2>
+        <p class="contact-section__desc">
+          Để lại thông tin, ekip Ký Ức sẽ liên hệ lắng nghe câu chuyện của bạn
+          và tư vấn concept phù hợp, không vội vàng, không áp lực.
+        </p>
+        <div class="contact-section__direct">
+          <p class="contact-section__direct-label">Hoặc liên hệ trực tiếp:</p>
+          <div class="contact-section__direct-row">
+            <a href="tel:0396387597" class="contact-section__pill">
+              <i class="bi bi-telephone-fill"></i>
+              <span>Gọi <strong>0396 387 597</strong></span>
+            </a>
+            <a href="#" class="contact-section__pill contact-section__pill--zalo">
+              <i class="bi bi-chat-dots-fill"></i> Nhắn Zalo
+            </a>
+            <a href="#" class="contact-section__pill contact-section__pill--msg">
+              <i class="bi bi-messenger"></i> Messenger
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-section__form-wrapper">
+        @if (submitted) {
+          <div class="contact-success">
+            <div class="contact-success__icon"><i class="bi bi-check-lg"></i></div>
+            <h3>Cảm ơn bạn!</h3>
+            <p>Ekip Ký Ức sẽ liên hệ với bạn trong thời gian sớm nhất.</p>
+            <button class="btn-outline-custom" (click)="submitted = false">Gửi yêu cầu khác</button>
+          </div>
+        } @else {
+          <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" class="contact-form">
+            <div class="contact-form__row">
+              <div class="contact-form__group">
+                <label>Họ và tên <span class="contact-form__required">*</span></label>
+                <input type="text" name="name" [(ngModel)]="formData.name" class="contact-form__input" placeholder="VD: Nguyễn Thị Hoa" required />
+              </div>
+              <div class="contact-form__group">
+                <label>Số điện thoại <span class="contact-form__required">*</span></label>
+                <input type="tel" name="phone" [(ngModel)]="formData.phone" class="contact-form__input" placeholder="VD: 0901 234 567" required pattern="[0-9]{10,11}" />
+              </div>
+            </div>
+            <div class="contact-form__row">
+              <div class="contact-form__group">
+                <label>Concept yêu thích</label>
+                <select name="concept" [(ngModel)]="formData.concept" class="contact-form__input">
+                  <option value="">-- Chọn dịch vụ --</option>
+                  <option>Chân dung</option>
+                  <option>Couple / Cặp đôi</option>
+                  <option>Gia đình</option>
+                  <option>Mẹ và con</option>
+                  <option>Áo dài</option>
+                  <option>Bạn bè - Sinh nhật</option>
+                </select>
+              </div>
+              <div class="contact-form__group">
+                <label>Ý tưởng concept cụ thể <span class="contact-form__optional">(nếu có)</span></label>
+                <input type="text" name="idea" [(ngModel)]="formData.idea" class="contact-form__input" placeholder="VD: Áo dài sen, Mẹ và con, Retro Sài Gòn xưa..." />
+              </div>
+            </div>
+            <div class="contact-form__group">
+              <label>Cơ sở gần nhất</label>
+              <div class="contact-form__radio-row">
+                <label class="contact-form__radio">
+                  <input type="radio" name="location" [(ngModel)]="formData.location" value="hanoi" />
+                  <span class="contact-form__radio-indicator"></span>
+                  Hà Nội
+                </label>
+                <label class="contact-form__radio">
+                  <input type="radio" name="location" [(ngModel)]="formData.location" value="saigon" />
+                  <span class="contact-form__radio-indicator"></span>
+                  TP Hồ Chí Minh
+                </label>
+              </div>
+            </div>
+            <div class="contact-form__group">
+              <label>Ghi chú thêm <span class="contact-form__optional">(tuỳ chọn)</span></label>
+              <textarea name="note" [(ngModel)]="formData.note" class="contact-form__input contact-form__textarea" rows="3" placeholder="VD: Muốn chụp dịp sinh nhật, cần concept Tết, đi cùng bé 3 tuổi..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary-custom contact-form__submit" [disabled]="!contactForm.valid">
+              Để ekip liên hệ với bạn
+              <i class="bi bi-arrow-right"></i>
+            </button>
+            <p class="contact-form__trust">
+              Ký Ức cam kết chỉ gọi một cuộc để tư vấn. Không spam, không làm phiền nếu bạn chưa sẵn sàng.
+            </p>
+          </form>
+        }
+      </div>
+    </div>
+  </div>
+</section>

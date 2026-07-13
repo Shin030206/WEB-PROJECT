@@ -1,0 +1,650 @@
+/* ============================================================
+  KÝ ỨC STUDIO — Concept Detail v2 (Figma 5-col grid)
+  Figma reference: figma-cd-basic.html
+  ============================================================ */
+
+/* ---- Page background gradient — Figma exact ---- */
+.concept-detail {
+  background: linear-gradient(180deg, #FEF7F2 0%, rgba(246, 223, 211, 0.20) 100%);
+  padding-bottom: var(--space-5xl);
+}
+
+/* ================================================================
+   BREADCRUMB — Figma: "Quay lại danh mục concept"
+   ================================================================ */
+.concept-detail__back {
+  padding-top: calc(var(--space-4xl) + var(--space-2xl));
+  padding-bottom: var(--space-2xl);
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--transition-fast);
+
+    i { font-size: 0.85rem; }
+
+    &:hover { color: var(--color-primary); }
+  }
+}
+
+/* ================================================================
+   HERO — Figma 5-col grid: image cols 1-3, info cols 4-5, gap 48px
+   ================================================================ */
+.concept-detail__hero {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 48px;
+  margin-bottom: var(--space-5xl);
+}
+
+/* ---- Image Column (cols 1-3) — Figma: height ~835px ---- */
+.concept-detail__image {
+  grid-column: 1 / 4;
+}
+
+.concept-detail__img {
+  width: 100%;
+  height: 100%;
+  max-height: 835px;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-card);
+}
+
+/* ---- Info Column (cols 4-5) — Figma: flex column, gap 16px ---- */
+.concept-detail__info {
+  grid-column: 4 / 6;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Category badge — Figma: Inter 12px, #A74A00, letter-spacing 3.6px, uppercase */
+.concept-detail__category {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.225rem;   /* 3.6px / 16 */
+  display: block;
+}
+
+/* Title — Figma: Playfair Display 60px, #080503, letter-spacing -1.5px, line-height 60px */
+.concept-detail__title {
+  font-family: var(--font-display);
+  font-size: 3.75rem;          /* 60px */
+  font-weight: 400;
+  color: #080503;
+  line-height: 1.0;            /* 60px/60px */
+  letter-spacing: -0.09375rem; /* -1.5px/16 */
+  margin: 0;
+}
+
+/* Description paragraphs — Figma: Inter 16px, #554339, line-height 26px */
+.concept-detail__desc {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  color: var(--color-detail-body);
+  line-height: 1.625;          /* 26px/16px */
+  margin: 0;
+}
+
+/* ---- Price Info Box — Figma: 16px radius, semi-transparent bg ---- */
+.concept-detail__price-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px;
+  border-radius: var(--radius-related);   /* 16px */
+  border: 1px solid var(--color-price-box-border);
+  background: var(--color-price-box-bg);
+}
+
+/* Price label — Inter 12px, #775D4F, uppercase, letter-spacing 0.6px */
+.concept-detail__price-label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.0375rem;   /* 0.6px/16 */
+}
+
+/* Price value — Playfair Display 36px, #A74A00, line-height 40px */
+.concept-detail__price-value {
+  font-family: var(--font-display);
+  font-size: 2.25rem;          /* 36px */
+  font-weight: 400;
+  color: var(--color-primary);
+  line-height: 1.11;           /* 40px/36px */
+}
+
+/* Price note — Inter 12px, #775D4F */
+.concept-detail__price-note {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+/* ---- Actions — Figma: full-width pill buttons, stacked ---- */
+.concept-detail__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Primary CTA button — Figma: 9999px pill, #A74A00 bg, shadow */
+.concept-detail__btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 32px;
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  font-weight: 500;
+  color: #fff;
+  background: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  box-shadow: 0px 4px 24px rgba(142, 97, 38, 0.25);
+  transition: background var(--transition-fast), box-shadow var(--transition-fast);
+
+  i { font-size: 1.1rem; }
+
+  &:hover {
+    background: var(--color-primary-dark);
+    box-shadow: 0px 6px 28px rgba(142, 97, 38, 0.35);
+  }
+}
+
+/* Outline button — Figma: 9999px pill, bordered, #FEF7F2 bg */
+.concept-detail__btn-outline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px;
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  background: var(--neutral-silver);
+  border: 1px solid rgba(244, 224, 209, 0.70);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+
+  &:hover {
+    background: var(--color-bg-warm);
+    border-color: var(--color-primary);
+  }
+}
+
+/* ================================================================
+   RELATED CONCEPTS — Figma: gradient bg, 4 cards, 16px gap
+   ================================================================ */
+.concept-detail__related {
+  padding: 64px 0;
+  background: linear-gradient(180deg, #FEF7F2 0%, rgba(246, 223, 211, 0.20) 100%);
+}
+
+/* Heading — Playfair Display 30px, #080503, line-height 36px */
+.concept-detail__related-heading {
+  font-family: var(--font-display);
+  font-size: 1.875rem;        /* 30px */
+  font-weight: 400;
+  color: #080503;
+  line-height: 1.2;           /* 36px/30px */
+  margin: 0 0 var(--space-2xl);
+}
+
+/* 4-card grid — 16px gap */
+.concept-detail__related-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+/* Related card — Figma: flex column, gap 12px */
+.concept-detail__related-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-decoration: none;
+  transition: transform var(--transition-spring);
+
+  &:hover {
+    transform: translateY(-4px);
+
+    .concept-detail__related-img {
+      transform: scale(1.04);
+    }
+  }
+}
+
+/* Image wrap — 16px radius, #F6DFD3 bg, aspect-ratio 4/5, shadow */
+.concept-detail__related-img-wrap {
+  border-radius: var(--radius-related);    /* 16px */
+  background: #F6DFD3;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  box-shadow: var(--shadow-related-card);
+}
+
+.concept-detail__related-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Card name — Playfair Display 18px, #080503, line-height 28px */
+.concept-detail__related-name {
+  font-family: var(--font-display);
+  font-size: 1.125rem;         /* 18px */
+  font-weight: 400;
+  color: #080503;
+  line-height: 1.56;           /* 28px/18px */
+}
+
+/* ================================================================
+   CONSULTATION FORM — Figma dark background (#3D2B1F)
+   Matches homepage consultation form pattern
+   ================================================================ */
+.concept-detail__consult {
+  margin-top: var(--space-5xl);
+}
+
+.concept-detail__consult-bg {
+  background: var(--color-dark-section);
+  padding: 128px 0;
+}
+
+/* Section header */
+.concept-detail__consult-header {
+  text-align: center;
+  margin-bottom: var(--space-3xl);
+}
+
+/* Eyebrow — Montserrat, matching homepage */
+.concept-detail__consult-eyebrow {
+  font-family: var(--font-price-desc);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-eyebrow-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin: 0 0 var(--space-sm);
+}
+
+/* Heading — Playfair Display, white */
+.concept-detail__consult-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.15;
+  margin: 0 0 var(--space-md);
+}
+
+.concept-detail__consult-heading-em {
+  font-style: italic;
+}
+
+/* Subtitle */
+.concept-detail__consult-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: rgba(254, 247, 242, 0.7);
+  margin: 0;
+}
+
+/* Form card — 24px radius, white bg, shadow */
+.concept-detail__consult-form {
+  background: var(--neutral-silver);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-form);
+  padding: var(--space-5xl) var(--space-2xl) var(--space-2xl);
+}
+
+/* Row: 2 fields side by side */
+.concept-detail__consult-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+/* Field wrapper */
+.concept-detail__consult-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+
+  &--full {
+    margin-bottom: var(--space-lg);
+  }
+}
+
+/* Labels */
+.concept-detail__consult-label {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+
+  span { color: var(--color-error); }
+}
+
+/* Inputs & Selects — 9999px pill, height 48px */
+.concept-detail__consult-input {
+  height: 48px;
+  padding: 14.5px 20px;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  background: #fff;
+  border: 1px solid rgba(244, 224, 209, 0.70);
+  border-radius: var(--radius-full);
+  outline: none;
+  transition: border-color var(--transition-fast);
+
+  &::placeholder { color: var(--color-text-muted); }
+
+  &:focus {
+    border-color: var(--color-primary);
+  }
+}
+
+/* Select arrow styling */
+.concept-detail__consult-input[type="select"],
+select.concept-detail__consult-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%23775D4F'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  padding-right: 44px;
+  cursor: pointer;
+}
+
+/* Textareas — 16px radius */
+.concept-detail__consult-textarea {
+  padding: 12px 20px 72px;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  background: #fff;
+  border: 1px solid rgba(244, 224, 209, 0.70);
+  border-radius: var(--radius-md);
+  outline: none;
+  resize: vertical;
+  transition: border-color var(--transition-fast);
+
+  &::placeholder { color: var(--color-text-muted); }
+
+  &:focus {
+    border-color: var(--color-primary);
+  }
+}
+
+/* Submit button */
+.concept-detail__consult-submit {
+  width: 100%;
+}
+
+.concept-detail__consult-disclaimer {
+  text-align: center;
+  font-family: var(--font-price-desc);
+  font-size: var(--text-xs);
+  color: var(--neutral-l-grey);
+  margin: var(--space-sm) 0 var(--space-2xl);
+  line-height: 1.5;
+}
+
+.concept-detail__consult-label-optional {
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+/* "Cơ sở gần nhất" — 2-option selector */
+.concept-detail__consult-location-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.concept-detail__consult-location-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 18px;
+  border: 1px solid rgba(244, 224, 209, 0.70);
+  border-radius: var(--radius-md);
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  i {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+  }
+
+  span {
+    display: flex;
+    flex-direction: column;
+  }
+
+  strong {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+  }
+
+  small {
+    font-family: var(--font-price-desc);
+    font-size: var(--text-2xs);
+    color: var(--color-text-muted);
+  }
+
+  &:hover {
+    border-color: var(--color-primary);
+  }
+
+  &.active {
+    border-color: var(--color-primary);
+    background: var(--tint-t5);
+
+    i { color: var(--color-primary); }
+  }
+}
+
+/* Contact pills — glassmorphism */
+.concept-detail__consult-contacts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.concept-detail__consult-contacts-label {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.concept-detail__consult-contacts-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.concept-detail__consult-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: #fff;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  backdrop-filter: blur(2px);
+  transition: background var(--transition-fast);
+
+  i { font-size: 0.9rem; }
+}
+
+.concept-detail__consult-pill--zalo {
+  background: rgba(254, 247, 242, 0.15);
+  &:hover { background: rgba(254, 247, 242, 0.25); }
+}
+
+.concept-detail__consult-pill--messenger {
+  background: rgba(254, 247, 242, 0.15);
+  &:hover { background: rgba(254, 247, 242, 0.25); }
+}
+
+.concept-detail__consult-pill--hotline {
+  background: rgba(254, 247, 242, 0.15);
+  &:hover { background: rgba(254, 247, 242, 0.25); }
+}
+
+/* ================================================================
+   NOT FOUND STATE
+   ================================================================ */
+.concept-detail__not-found {
+  text-align: center;
+  padding: var(--space-6xl) var(--space-xl);
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.concept-detail__not-found-icon {
+  font-size: 3.5rem;
+  color: var(--color-border);
+  margin-bottom: var(--space-xl);
+}
+
+.concept-detail__not-found h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 400;
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-md);
+}
+
+.concept-detail__not-found p {
+  color: var(--color-text-light);
+  margin: 0 0 var(--space-2xl);
+  font-size: var(--text-base);
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 992px) {
+  .concept-detail__hero {
+    grid-template-columns: 1fr;
+    gap: var(--space-3xl);
+  }
+
+  .concept-detail__image {
+    grid-column: 1;
+    max-width: 480px;
+  }
+
+  .concept-detail__img {
+    max-height: 600px;
+  }
+
+  .concept-detail__info {
+    grid-column: 1;
+  }
+
+  .concept-detail__title {
+    font-size: 2.5rem;
+  }
+
+  .concept-detail__related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .concept-detail__consult-bg {
+    padding: 80px 0;
+  }
+
+  .concept-detail__consult-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .concept-detail__related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .concept-detail__title {
+    font-size: 2rem;
+  }
+
+  .concept-detail__price-value {
+    font-size: 1.75rem;
+  }
+
+  .concept-detail__consult-bg {
+    padding: 64px 0;
+  }
+
+  .concept-detail__consult-form {
+    padding: var(--space-3xl) var(--space-lg) var(--space-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .concept-detail__back {
+    padding-top: calc(var(--space-3xl) + var(--space-xl));
+  }
+
+  .concept-detail__hero {
+    gap: var(--space-xl);
+  }
+
+  .concept-detail__img {
+    max-height: 420px;
+  }
+
+  .concept-detail__title {
+    font-size: 1.75rem;
+  }
+
+  .concept-detail__related-grid {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .concept-detail__actions {
+    gap: 10px;
+  }
+
+  .concept-detail__consult-heading {
+    font-size: var(--text-3xl);
+  }
+}

@@ -1,0 +1,111 @@
+<section class="payment-page">
+  <div class="payment-page__banner">
+    <div class="container-custom">
+      <h1>Thanh toán tiền cọc</h1>
+      <p>Hoàn tất thanh toán cọc {{ depositPercent }}% để xác nhận lịch chụp</p>
+    </div>
+  </div>
+
+  <div class="container-custom payment-page__content">
+    <!-- Order Summary -->
+    <div class="payment-summary">
+      <h3>Thông tin đơn hàng</h3>
+      <div class="payment-summary__row">
+        <span>Gói dịch vụ</span>
+        <span>Chân dung — Cao Cấp</span>
+      </div>
+      <div class="payment-summary__row">
+        <span>Tổng giá trị</span>
+        <span>{{ formatPrice(totalAmount) }}</span>
+      </div>
+      <div class="payment-summary__row payment-summary__row--deposit">
+        <span>Tiền cọc ({{ depositPercent }}%)</span>
+        <span>{{ formatPrice(depositAmount) }}</span>
+      </div>
+      <div class="payment-summary__row payment-summary__row--note">
+        <span><i class="bi bi-info-circle"></i> Số tiền còn lại {{ formatPrice(totalAmount - depositAmount) }} thanh toán sau buổi chụp</span>
+      </div>
+    </div>
+
+    <!-- Payment Methods -->
+    <h2>Chọn phương thức thanh toán</h2>
+    <div class="payment-methods">
+      <!-- Bank Transfer -->
+      <div class="payment-method" [class.active]="selectedMethod === 'bank'" (click)="selectMethod('bank')">
+        <div class="payment-method__header">
+          <i class="bi bi-bank"></i>
+          <div>
+            <h4>Chuyển khoản ngân hàng</h4>
+            <p>Hỗ trợ tất cả ngân hàng nội địa</p>
+          </div>
+          <span class="payment-method__check">✓</span>
+        </div>
+        @if (selectedMethod === 'bank') {
+          <div class="payment-method__detail">
+            <p><strong>Ngân hàng:</strong> Vietcombank — CN Hà Nội</p>
+            <p><strong>Số tài khoản:</strong> 0123456789</p>
+            <p><strong>Chủ tài khoản:</strong> Ký Ức Studio</p>
+            <p><strong>Nội dung chuyển khoản:</strong> [Họ tên] — [SĐT] — DatCoc</p>
+            <div class="payment-method__upload">
+              <button class="btn-primary-custom">Tải lên ảnh xác nhận</button>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Momo -->
+      <div class="payment-method" [class.active]="selectedMethod === 'momo'" (click)="selectMethod('momo')">
+        <div class="payment-method__header">
+          <i class="bi bi-wallet2"></i>
+          <div>
+            <h4>Ví Momo</h4>
+            <p>Thanh toán nhanh qua ví điện tử</p>
+          </div>
+          <span class="payment-method__check">✓</span>
+        </div>
+        @if (selectedMethod === 'momo') {
+          <div class="payment-method__detail">
+            <div class="payment-method__qr">
+              <div class="payment-method__qr-placeholder">
+                <span>QR Code</span>
+                <small>Momo</small>
+              </div>
+            </div>
+            <p>Quét mã QR bằng ứng dụng Momo để thanh toán</p>
+          </div>
+        }
+      </div>
+
+      <!-- VNPay -->
+      <div class="payment-method" [class.active]="selectedMethod === 'vnpay'" (click)="selectMethod('vnpay')">
+        <div class="payment-method__header">
+          <i class="bi bi-qr-code-scan"></i>
+          <div>
+            <h4>VNPay</h4>
+            <p>Thanh toán qua cổng VNPay</p>
+          </div>
+          <span class="payment-method__check">✓</span>
+        </div>
+        @if (selectedMethod === 'vnpay') {
+          <div class="payment-method__detail">
+            <div class="payment-method__qr">
+              <div class="payment-method__qr-placeholder">
+                <span>QR Code</span>
+                <small>VNPay</small>
+              </div>
+            </div>
+            <p>Quét mã QR hoặc chuyển đến cổng VNPay để thanh toán</p>
+          </div>
+        }
+      </div>
+    </div>
+
+    @if (selectedMethod) {
+      <div class="payment-page__confirm">
+        <button class="btn-primary-custom">
+          Xác nhận đã thanh toán →
+        </button>
+      </div>
+    }
+  </div>
+</section>

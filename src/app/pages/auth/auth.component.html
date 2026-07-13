@@ -1,0 +1,83 @@
+<section class="auth-page">
+  <div class="auth-card">
+    <div class="auth-card__header">
+      <a routerLink="/" class="auth-card__logo">
+        <span>✦</span> Ký Ức Studio
+      </a>
+      <h2>{{ isLogin ? 'Đăng nhập' : 'Đăng ký' }}</h2>
+      <p>{{ isLogin ? 'Chào mừng bạn trở lại' : 'Tạo tài khoản để đặt lịch nhanh hơn' }}</p>
+    </div>
+
+    @if (submitted) {
+      <div class="auth-card__success">
+        <div class="auth-card__success-icon">✓</div>
+        <h3>{{ isLogin ? 'Đăng nhập thành công!' : 'Đăng ký thành công!' }}</h3>
+        <p>Chào mừng bạn đến với Ký Ức Studio.</p>
+        <a routerLink="/booking" class="btn-primary-custom">Đặt lịch ngay</a>
+      </div>
+    } @else if (isLogin) {
+      <!-- Login Form -->
+      <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)" class="auth-form">
+        <div class="auth-form__group">
+          <label>Số điện thoại *</label>
+          <input type="tel" name="phone" [(ngModel)]="loginData.phone"
+                 class="auth-form__input" placeholder="VD: 0901 234 567" required pattern="[0-9]{10,11}" />
+        </div>
+        <div class="auth-form__group">
+          <label>Mật khẩu *</label>
+          <input type="password" name="password" [(ngModel)]="loginData.password"
+                 class="auth-form__input" placeholder="Nhập mật khẩu" required minlength="6" />
+        </div>
+        <button type="submit" class="btn-primary-custom auth-form__submit" [disabled]="!loginForm.valid">
+          Đăng nhập
+        </button>
+      </form>
+    } @else {
+      <!-- Register Form -->
+      <form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm)" class="auth-form">
+        <div class="auth-form__group">
+          <label>Họ và tên *</label>
+          <input type="text" name="name" [(ngModel)]="registerData.name"
+                 class="auth-form__input" placeholder="VD: Nguyễn Thị Hoa" required />
+        </div>
+        <div class="auth-form__group">
+          <label>Số điện thoại *</label>
+          <input type="tel" name="phone" [(ngModel)]="registerData.phone"
+                 class="auth-form__input" placeholder="VD: 0901 234 567" required pattern="[0-9]{10,11}" />
+        </div>
+        <div class="auth-form__group">
+          <label>Mật khẩu *</label>
+          <input type="password" name="password" [(ngModel)]="registerData.password"
+                 class="auth-form__input" placeholder="Tối thiểu 6 ký tự" required minlength="6" />
+        </div>
+        <div class="auth-form__group">
+          <label>Xác nhận mật khẩu *</label>
+          <input type="password" name="confirmPassword" [(ngModel)]="registerData.confirmPassword"
+                 class="auth-form__input" placeholder="Nhập lại mật khẩu" required />
+        </div>
+
+        @if (showOtp) {
+          <div class="auth-form__group">
+            <label>Mã OTP *</label>
+            <input type="text" name="otp" [(ngModel)]="registerData.otp"
+                   class="auth-form__input" placeholder="Nhập mã OTP gửi về SĐT" required minlength="6" />
+            <small class="auth-form__hint">Mã OTP đã được gửi đến số điện thoại của bạn</small>
+          </div>
+        }
+
+        <button type="submit" class="btn-primary-custom auth-form__submit" [disabled]="!registerForm.valid">
+          {{ showOtp ? 'Xác nhận đăng ký' : 'Gửi mã OTP' }}
+        </button>
+      </form>
+    }
+
+    <div class="auth-card__footer">
+      <p>
+        {{ isLogin ? 'Chưa có tài khoản?' : 'Đã có tài khoản?' }}
+        <button type="button" (click)="toggleMode()">
+          {{ isLogin ? 'Đăng ký ngay' : 'Đăng nhập' }}
+        </button>
+      </p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,236 @@
+<!-- ============================================================
+  KÝ ỨC STUDIO — Concept Detail v2 (Figma 5-col grid)
+  Figma reference: figma-cd-basic.html
+  ============================================================ -->
+
+<section class="concept-detail">
+  @if (concept) {
+    <!-- Breadcrumb — Figma: "Quay lại danh mục concept" -->
+    <div class="container-custom concept-detail__back">
+      <a routerLink="/concepts" [queryParams]="{category: concept.category}">
+        <i class="bi bi-arrow-left"></i> Quay lại danh mục concept
+      </a>
+    </div>
+
+    <!-- ===== Hero Section — Figma 5-col grid ===== -->
+    <div class="concept-detail__hero container-custom">
+      <!-- Image Column — cols 1-3 (grid-column: 1 / 4) -->
+      <div class="concept-detail__image">
+        <img
+          [src]="'assets/' + concept.image"
+          [alt]="concept.name"
+          class="concept-detail__img"
+        />
+      </div>
+
+      <!-- Info Column — cols 4-5 (grid-column: 4 / 6) -->
+      <div class="concept-detail__info">
+        <!-- Category badge — Figma: Inter 12px, #A74A00, letter-spacing 3.6px, uppercase -->
+        <span class="concept-detail__category">{{ concept.category }}</span>
+
+        <!-- Title — Figma: Playfair Display 60px, #080503 -->
+        <h1 class="concept-detail__title">{{ concept.name }}</h1>
+
+        <!-- Description paragraphs — Figma: Inter 16px, #554339, line-height 26px, gap 26px -->
+        @for (para of getLongDescription(); track $index) {
+          <p class="concept-detail__desc">{{ para }}</p>
+        }
+
+        <!-- Price info box — Figma: 16px radius, semi-transparent bg -->
+        <div class="concept-detail__price-box">
+          <span class="concept-detail__price-label">Giá từ</span>
+          <strong class="concept-detail__price-value">{{ concept.price }}</strong>
+          <span class="concept-detail__price-note">{{ concept.priceNote }}</span>
+        </div>
+
+        <!-- Actions — Figma: full-width pill buttons, stacked -->
+        <div class="concept-detail__actions">
+          <a routerLink="/booking" class="concept-detail__btn-primary">
+            Đặt lịch concept này <i class="bi bi-arrow-right"></i>
+          </a>
+          <a
+            [routerLink]="['/pricing']"
+            [queryParams]="{category: concept.category}"
+            class="concept-detail__btn-outline"
+          >
+            Xem dịch vụ {{ concept.category }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Related Concepts — Figma: gradient bg, 4 cards, 16px gap ===== -->
+    @if (relatedConcepts.length > 0) {
+      <div class="concept-detail__related">
+        <div class="container-custom">
+          <h2 class="concept-detail__related-heading">
+            Concept khác trong {{ concept.category }}
+          </h2>
+          <div class="concept-detail__related-grid">
+            @for (c of relatedConcepts; track c.id) {
+              <a [routerLink]="['/concept', c.id]" class="concept-detail__related-card">
+                <div class="concept-detail__related-img-wrap">
+                  <img
+                    [src]="'assets/' + c.image"
+                    [alt]="c.name"
+                    class="concept-detail__related-img"
+                    loading="lazy"
+                  />
+                </div>
+                <span class="concept-detail__related-name">{{ c.name }}</span>
+              </a>
+            }
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- ===== Consultation Form — Figma dark background (#3D2B1F) ===== -->
+    <section class="concept-detail__consult">
+      <div class="concept-detail__consult-bg">
+        <div class="container-custom container-custom--narrow">
+          <!-- Section header -->
+          <div class="concept-detail__consult-header">
+            <p class="concept-detail__consult-eyebrow">Khi bạn sẵn sàng</p>
+            <h2 class="concept-detail__consult-heading">
+              Câu chuyện của bạn<br />
+              <em class="concept-detail__consult-heading-em">bắt đầu ở đây</em>
+            </h2>
+            <p class="concept-detail__consult-subtitle">
+              Để lại thông tin, đội ngũ Ký Ức Studio sẽ liên hệ tư vấn trong 30 phút.
+            </p>
+          </div>
+
+          <!-- Form card — white card on dark background, 24px radius -->
+          <form class="concept-detail__consult-form animate-fade-in-up" #consultForm="ngForm" (ngSubmit)="submitConsultation(consultForm)">
+            <!-- Row 1: Name + Phone -->
+            <div class="concept-detail__consult-row">
+              <div class="concept-detail__consult-field">
+                <label class="concept-detail__consult-label">Họ và tên <span>*</span></label>
+                <input
+                  type="text"
+                  class="concept-detail__consult-input"
+                  name="name"
+                  [(ngModel)]="consultData.name"
+                  placeholder="Nguyễn Văn A"
+                  required
+                />
+              </div>
+              <div class="concept-detail__consult-field">
+                <label class="concept-detail__consult-label">Số điện thoại <span>*</span></label>
+                <input
+                  type="tel"
+                  class="concept-detail__consult-input"
+                  name="phone"
+                  [(ngModel)]="consultData.phone"
+                  placeholder="0912 345 678"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Concept — full width -->
+            <div class="concept-detail__consult-field concept-detail__consult-field--full">
+              <label class="concept-detail__consult-label">Concept yêu thích</label>
+              <select class="concept-detail__consult-input" name="concept" [(ngModel)]="consultData.concept">
+                <option value="">-- Chọn dịch vụ --</option>
+                @for (cat of data.filterCategories; track cat) {
+                  <option [value]="cat">{{ cat }}</option>
+                }
+              </select>
+            </div>
+
+            <!-- Idea -->
+            <div class="concept-detail__consult-field concept-detail__consult-field--full">
+              <label class="concept-detail__consult-label">Ý tưởng concept cụ thể (nếu có)</label>
+              <input
+                type="text"
+                class="concept-detail__consult-input"
+                name="idea"
+                [(ngModel)]="consultData.idea"
+                placeholder="VD: Áo dài sen, Mẹ và con, Retro Sài Gòn xưa..."
+              />
+            </div>
+
+            <!-- Cơ sở gần nhất — 2-option selector -->
+            <div class="concept-detail__consult-field concept-detail__consult-field--full">
+              <label class="concept-detail__consult-label">Cơ sở gần nhất</label>
+              <div class="concept-detail__consult-location-options">
+                <button
+                  type="button"
+                  class="concept-detail__consult-location-option"
+                  [class.active]="consultData.location === 'Hà Nội'"
+                  (click)="consultData.location = 'Hà Nội'"
+                >
+                  <i class="bi bi-geo-alt"></i>
+                  <span>
+                    <strong>Hà Nội</strong>
+                    <small>Cơ sở Hà Nội</small>
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  class="concept-detail__consult-location-option"
+                  [class.active]="consultData.location === 'Sài Gòn'"
+                  (click)="consultData.location = 'Sài Gòn'"
+                >
+                  <i class="bi bi-geo-alt"></i>
+                  <span>
+                    <strong>TP Hồ Chí Minh</strong>
+                    <small>Cơ sở Sài Gòn</small>
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Note -->
+            <div class="concept-detail__consult-field concept-detail__consult-field--full">
+              <label class="concept-detail__consult-label">Ghi chú thêm <span class="concept-detail__consult-label-optional">(tuỳ chọn)</span></label>
+              <textarea
+                class="concept-detail__consult-textarea"
+                name="note"
+                [(ngModel)]="consultData.note"
+                placeholder="VD: Muốn chụp dịp sinh nhật, cần concept Tết, đi cùng bé 3 tuổi..."
+                rows="2"
+              ></textarea>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn-primary-custom btn-primary-custom--lg concept-detail__consult-submit" [disabled]="consultSubmitted">
+              @if (!consultSubmitted) { <span>Để ekip liên hệ với bạn</span> }
+              @if (consultSubmitted) { <span><i class="bi bi-check-circle"></i> Đã gửi thành công!</span> }
+              <span class="btn-primary-custom__icon-circle"><i class="bi bi-arrow-right"></i></span>
+            </button>
+            <p class="concept-detail__consult-disclaimer">
+              Ký Ức Studio cam kết chỉ gọi một cuộc để tư vấn. Không spam, không làm phiền nếu bạn chưa sẵn sàng.
+            </p>
+
+            <!-- Contact pills — glassmorphism -->
+            <div class="concept-detail__consult-contacts">
+              <span class="concept-detail__consult-contacts-label">hoặc liên hệ qua</span>
+              <div class="concept-detail__consult-contacts-pills">
+                <a [href]="'https://zalo.me/' + data.phoneNumber" target="_blank" class="concept-detail__consult-pill concept-detail__consult-pill--zalo">
+                  <i class="bi bi-chat-dots"></i> Zalo
+                </a>
+                <a href="https://m.me/kyucstudio" target="_blank" class="concept-detail__consult-pill concept-detail__consult-pill--messenger">
+                  <i class="bi bi-messenger"></i> Messenger
+                </a>
+                <a [href]="'tel:' + data.phoneNumber" class="concept-detail__consult-pill concept-detail__consult-pill--hotline">
+                  <i class="bi bi-telephone"></i> {{ data.phoneNumber }}
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  } @else {
+    <!-- Not Found State -->
+    <div class="concept-detail__not-found container-custom">
+      <div class="concept-detail__not-found-icon"><i class="bi bi-image"></i></div>
+      <h1>Concept không tìm thấy</h1>
+      <p>Concept này có thể đã bị xóa hoặc không tồn tại.</p>
+      <a routerLink="/concepts" class="btn-primary-custom">Xem tất cả concept</a>
+    </div>
+  }
+</section>

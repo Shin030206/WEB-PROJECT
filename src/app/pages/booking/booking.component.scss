@@ -1,0 +1,38 @@
+.booking-page {
+  &__banner { background: linear-gradient(165deg, #FEF7F2 0%, #F9F7F1 40%, #F4E0D1 100%);
+    padding: var(--space-4xl) 0; text-align: center;
+    h1 { color: var(--color-text-primary); font-size: var(--text-4xl); margin-bottom: var(--space-sm); }
+    p { color: var(--color-text-light); font-size: var(--text-lg); } }
+  &__content { padding: var(--space-4xl) 0 var(--space-5xl); max-width: 800px; }
+  &__success { text-align: center; padding: var(--space-4xl) var(--space-xl); background: var(--color-bg-warm); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); }
+  &__success-icon { width: 72px; height: 72px; border-radius: 50%; background: var(--color-success); color: white; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto var(--space-xl); }
+  &__success-actions { display: flex; gap: var(--space-md); justify-content: center; margin-top: var(--space-xl); }
+}
+
+.booking-form {
+  background: var(--color-bg-warm); padding: var(--space-3xl); border-radius: var(--radius-xl); box-shadow: var(--shadow-md);
+  &__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); margin-bottom: var(--space-xl); }
+  &__group { margin-bottom: var(--space-xl); }
+  label { display: block; font-size: var(--text-sm); font-weight: 500; margin-bottom: var(--space-xs); color: var(--color-text-primary); }
+  &__input { width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-md);
+    font-family: var(--font-body); font-size: var(--text-sm); transition: all var(--transition-fast);
+    &:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(139,94,60,0.1); }
+    &:disabled { background: var(--color-bg-cream); }
+    &.ng-invalid.ng-touched { border-color: var(--color-error); } }
+  &__textarea { resize: vertical; }
+  &__addons { grid-column: 1 / -1; }
+  &__checkbox-group { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-sm); }
+  &__checkbox { display: flex; align-items: center; gap: var(--space-sm); cursor: pointer; font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    input { accent-color: var(--color-primary); } }
+  &__info { background: var(--color-bg-cream); padding: var(--space-md); border-radius: var(--radius-md); margin-top: var(--space-md);
+    p { font-size: var(--text-sm); color: var(--color-text-light); margin: 0; display: flex; align-items: flex-start; gap: var(--space-sm);
+      i { color: var(--color-primary); } } }
+  &__submit { width: 100%; justify-content: center; margin-top: var(--space-xl); font-size: var(--text-lg) !important;
+    &:disabled { opacity: 0.5; cursor: not-allowed; } }
+}
+
+@media (max-width: 768px) {
+  .booking-form__grid { grid-template-columns: 1fr; }
+  .booking-form__checkbox-group { grid-template-columns: 1fr; }
+}

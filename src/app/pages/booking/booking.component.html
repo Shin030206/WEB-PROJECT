@@ -1,0 +1,111 @@
+<section class="booking-page">
+  <div class="booking-page__banner">
+    <div class="container-custom">
+      <h1>Đặt lịch chụp ảnh</h1>
+      <p>Chọn gói, chọn ngày — ekip sẽ liên hệ xác nhận trong 24h</p>
+    </div>
+  </div>
+
+  <div class="container-custom booking-page__content">
+    @if (submitted) {
+      <div class="booking-page__success">
+        <div class="booking-page__success-icon">✓</div>
+        <h2>Đã gửi yêu cầu thành công!</h2>
+        <p>Ekip Ký Ức sẽ liên hệ với bạn trong vòng 24 giờ làm việc để xác nhận lịch chụp.</p>
+        <div class="booking-page__success-actions">
+          <a routerLink="/" class="btn-primary-custom">Về trang chủ</a>
+          <a routerLink="/profile" class="btn-outline-custom">Theo dõi trạng thái</a>
+        </div>
+      </div>
+    } @else {
+      <form #bookingForm="ngForm" (ngSubmit)="onSubmit(bookingForm)" class="booking-form">
+        <div class="booking-form__grid">
+          <!-- Service Selection -->
+          <div class="booking-form__group">
+            <label>Chọn gói dịch vụ *</label>
+            <select name="service" [(ngModel)]="bookingData.service" class="booking-form__input" required>
+              <option value="">-- Chọn gói dịch vụ --</option>
+              @for (cat of data.pricingCategories; track cat.id) {
+                <option [value]="cat.id">{{ cat.name }}</option>
+              }
+            </select>
+          </div>
+
+          <!-- Tier -->
+          <div class="booking-form__group">
+            <label>Chọn cấp độ *</label>
+            <select name="tier" [(ngModel)]="bookingData.tier" class="booking-form__input" required [disabled]="!bookingData.service">
+              <option value="">-- Chọn cấp độ --</option>
+              @if (selectedService) {
+                @for (tier of selectedService.tiers; track tier.name) {
+                  <option [value]="tier.name">{{ tier.name }} — {{ tier.price.toLocaleString('vi-VN') }}đ</option>
+                }
+              }
+            </select>
+          </div>
+
+          <!-- Date -->
+          <div class="booking-form__group">
+            <label>Ngày dự kiến chụp *</label>
+            <input type="date" name="date" [(ngModel)]="bookingData.date"
+                   class="booking-form__input" [min]="minDate" required />
+          </div>
+
+          <!-- Location -->
+          <div class="booking-form__group">
+            <label>Cơ sở *</label>
+            <select name="location" [(ngModel)]="bookingData.location" class="booking-form__input" required>
+              <option value="">-- Chọn cơ sở --</option>
+              <option value="hanoi">Hà Nội</option>
+              <option value="saigon">TP Hồ Chí Minh</option>
+            </select>
+          </div>
+
+          <!-- Name -->
+          <div class="booking-form__group">
+            <label>Họ và tên *</label>
+            <input type="text" name="name" [(ngModel)]="bookingData.name"
+                   class="booking-form__input" placeholder="VD: Nguyễn Thị Hoa" required />
+          </div>
+
+          <!-- Phone -->
+          <div class="booking-form__group">
+            <label>Số điện thoại *</label>
+            <input type="tel" name="phone" [(ngModel)]="bookingData.phone"
+                   class="booking-form__input" placeholder="VD: 0901 234 567" required pattern="[0-9]{10,11}" />
+          </div>
+        </div>
+
+        <!-- Add-ons -->
+        <div class="booking-form__group booking-form__addons">
+          <label>Dịch vụ bổ sung (tuỳ chọn)</label>
+          <div class="booking-form__checkbox-group">
+            @for (svc of data.addonServices; track svc.name) {
+              <label class="booking-form__checkbox">
+                <input type="checkbox" [value]="svc.name"
+                       (change)="toggleAddon(svc.name, $any($event.target).checked)" />
+                <span>{{ svc.name }} ({{ formatSvPrice(svc.price) }}đ{{ svc.unit }})</span>
+              </label>
+            }
+          </div>
+        </div>
+
+        <!-- Note -->
+        <div class="booking-form__group">
+          <label>Ghi chú thêm (tuỳ chọn)</label>
+          <textarea name="note" [(ngModel)]="bookingData.note" class="booking-form__input booking-form__textarea"
+                    rows="3" placeholder="VD: Muốn chụp dịp sinh nhật, cần concept Tết, đi cùng bé 3 tuổi..."></textarea>
+        </div>
+
+        <!-- Info box -->
+        <div class="booking-form__info">
+          <p><i class="bi bi-info-circle"></i> Sau khi gửi yêu cầu, nhân viên studio sẽ liên hệ trong vòng 24 giờ để xác nhận. Lịch chụp chính thức sau khi bạn hoàn tất thanh toán cọc 30%.</p>
+        </div>
+
+        <button type="submit" class="btn-primary-custom booking-form__submit" [disabled]="!bookingForm.valid">
+          Gửi yêu cầu đặt lịch →
+        </button>
+      </form>
+    }
+  </div>
+</section>

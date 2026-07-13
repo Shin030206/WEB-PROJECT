@@ -1,0 +1,85 @@
+<section class="profile-page">
+  <div class="profile-page__banner">
+    <div class="container-custom">
+      <h1>Tài khoản của tôi</h1>
+    </div>
+  </div>
+
+  <div class="container-custom profile-page__content">
+    <!-- User Info Card -->
+    <div class="profile-card">
+      <div class="profile-card__avatar">
+        <span>NH</span>
+      </div>
+      <div class="profile-card__info">
+        <h2>{{ user.name }}</h2>
+        <p><i class="bi bi-telephone"></i> {{ user.phone }}</p>
+      </div>
+      <div class="profile-card__points">
+        <span class="profile-card__points-value">{{ user.totalPoints }}</span>
+        <span class="profile-card__points-label">điểm tích lũy</span>
+        <small>10.000đ = 1 điểm</small>
+      </div>
+    </div>
+
+    <div class="profile-page__grid">
+      <!-- Left: Quick Actions -->
+      <div class="profile-page__sidebar">
+        <div class="profile-action-card">
+          <h4>Đặt lịch nhanh</h4>
+          <p>Đặt lịch với thông tin đã lưu</p>
+          <a routerLink="/booking" class="btn-primary-custom">Đặt lịch →</a>
+        </div>
+        <div class="profile-action-card">
+          <h4>Điểm tích lũy</h4>
+          <p><strong>{{ user.totalPoints }} điểm</strong> — quy đổi ưu đãi cho lần đặt lịch tiếp theo</p>
+        </div>
+      </div>
+
+      <!-- Right: Booking History -->
+      <div class="profile-page__main">
+        <h3>Lịch sử đặt lịch</h3>
+        <div class="booking-history">
+          @if (bookingHistory.length === 0) {
+            <div class="booking-history__empty">
+              <p>Chưa có lịch sử đặt lịch nào.</p>
+            </div>
+          } @else {
+            <div class="booking-history__table-wrapper">
+              <table class="booking-history__table">
+                <thead>
+                  <tr>
+                    <th>Mã đơn</th>
+                    <th>Gói dịch vụ</th>
+                    <th>Ngày chụp</th>
+                    <th>Ngày gửi</th>
+                    <th>Tiền cọc</th>
+                    <th>Điểm</th>
+                    <th>Trạng thái</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (order of bookingHistory; track order.id) {
+                    <tr>
+                      <td><strong>{{ order.id }}</strong></td>
+                      <td>{{ order.service }} — {{ order.tier }}</td>
+                      <td>{{ order.date }}</td>
+                      <td>{{ order.createdDate }}</td>
+                      <td>{{ formatPrice(order.deposit) }}</td>
+                      <td>{{ order.points }}</td>
+                      <td>
+                        <span class="status-badge" [style.background]="statusStyle(order.status) + '20'" [style.color]="statusStyle(order.status)">
+                          {{ order.status }}
+                        </span>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

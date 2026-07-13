@@ -1,0 +1,197 @@
+:root {
+  /* ===== Color Palette — Ký Ức Studio Warm Brown Tokens ===== */
+  /* Brand */
+  --brand-primary: #A74A00;
+  --brand-secondary: #2F2117;
+
+  /* Shades of Primary */
+  --shade-s2: #B86B00;
+  --shade-s5: #5C2E00;
+
+  /* Tints of Primary */
+  --tint-t4: #F4E0D1;
+  --tint-t5: #FEF7F2;
+
+  /* Neutral */
+  --neutral-black: #080503;
+  --neutral-d-grey: #2F2117;
+  --neutral-grey: #402E25;
+  --neutral-l-grey: #775D4F;
+  --neutral-silver: #FEF7F2;
+  --neutral-white: #FFFFFF;
+
+  /* Text */
+  --text-gray-900: #2F2117;
+  --text-gray-300: #F4E0D1;
+
+  /* ---- Legacy aliases for existing components ---- */
+  --color-primary: var(--brand-primary);
+  --color-primary-light: #C97A3E;
+  --color-primary-dark: var(--shade-s2);
+  --color-primary-deep: var(--shade-s5);
+  --color-accent: #C9A87C;
+  --color-accent-gold: #C9A87C;
+  --color-accent-rose: #E1D4C2;
+  --color-accent-blush: #F4E0D1;
+
+  --color-bg-cream: var(--neutral-silver);
+  --color-bg-warm: #F9F7F1;
+  --color-bg-beige: #EBE2C7;
+  --color-bg-ecru: #ECE8E2;
+  --color-bg-white: var(--neutral-white);
+  --color-bg-dark: var(--neutral-black);
+  --color-bg-charcoal: #2F2117;
+
+  --color-text-primary: var(--text-gray-900);
+  --color-text-secondary: var(--neutral-d-grey);
+  --color-text-light: var(--neutral-grey);
+  --color-text-muted: var(--neutral-l-grey);
+  --color-text-name: #6E473B;
+  --color-text-price: #563B3B;
+  --color-text-white: var(--neutral-white);
+  --color-text-cream: var(--neutral-silver);
+
+  --color-border: #F4E0D1;
+  --color-border-light: rgba(244, 224, 209, 0.5);
+  --color-border-gold: rgba(167, 74, 0, 0.2);
+  --color-success: #6B8E23;
+  --color-error: #D32F2F;
+  --color-gold: #C9A87C;
+
+  /* ===== Typography — Multi-font scrapbook strategy ===== */
+  --font-display: 'Playfair Display', 'Georgia', serif;
+  --font-body: 'Inter', 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-accent: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-price: 'Playfair Display', 'Georgia', serif;
+  --font-price-desc: 'Montserrat', 'Inter', sans-serif;
+  --font-concept-desc: 'Manrope', 'Inter', sans-serif;
+
+  /* Figma typography scale */
+  --text-display: 4rem;      /* 64px — Headline 1: 64/76 Semi Bold */
+  --text-h1: 2.25rem;        /* 36px — Headline 2: 36/44 Semi Bold */
+  --text-h2: 1.75rem;        /* 28px — Headline 3: 28/36 Bold */
+  --text-h3: 1.25rem;        /* 20px — Headline 4: 20/28 Semi Bold */
+  --text-body-lg: 1rem;      /* 16px — Body Regular 2: 16/24 */
+  --text-body: 0.875rem;     /* 14px — Body Regular 3: 14/20 */
+  --text-label: 0.875rem;    /* 14px — Label Medium: 14/20 Medium */
+
+  /* Legacy size aliases */
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.75rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 4rem;
+  --text-7xl: 5rem;
+
+  /* ===== Spacing ===== */
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4.5rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
+  --space-6xl: 10rem;
+
+  /* ===== Border Radius — Pill + Large Card ===== */
+  --radius-none: 0;
+  --radius-sm: 9999px;       /* Pill inputs / small buttons */
+  --radius-md: 16px;         /* Textarea / mid-round */
+  --radius-lg: 22px;         /* Card outer */
+  --radius-xl: 24px;         /* Card large */
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ===== Shadows — Figma v2 ===== */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0px 24px 32px rgba(47, 33, 23, 0.22);
+  --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.1);
+  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  /* Figma-specific shadow */
+  --shadow-8px: 0px 24px 32px rgba(47, 33, 23, 0.22);
+
+  /* ===== Transitions ===== */
+  --transition-fast: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ===== Layout ===== */
+  --max-width: 1152px;
+  --max-width-wide: 1400px;
+  --max-width-narrow: 800px;
+  --header-height: 84px;
+
+  /* ===== Section spacing ===== */
+  --space-section: 6rem;
+  --space-section-lg: 8rem;
+
+  /* ===== Card tokens — Figma v2 ===== */
+  --radius-card: 22px;
+  --radius-card-inner: 16px;
+  --shadow-card: 0px 4px 24px rgba(35, 31, 32, 0.06);
+  --shadow-card-hover: 0px 8px 36px rgba(47, 33, 23, 0.12);
+  --shadow-button: 0 2px 12px rgba(167, 74, 0, 0.25);
+
+  /* ===== Button tokens — Figma v2 pill ===== */
+  --btn-padding: 14px 32px;
+  --btn-radius: 9999px;
+  --btn-font: 500 16px/24px 'Inter', sans-serif;
+
+  /* ===== Z-index scale ===== */
+  --z-base: 1;
+  --z-sticky: 100;
+  --z-nav: 1000;
+  --z-overlay: 2000;
+  --z-modal: 3000;
+  --z-grain: 60;
+
+  /* ===== Figma Concept-specific tokens ===== */
+  --color-concept-desc: #555E34;            /* Concept card eyebrow & description */
+  --color-concept-link: #8E6126;            /* "Xem chi tiết →" link color */
+  --color-concept-card-border: rgba(222, 211, 191, 0.60);  /* Card outer border */
+  --color-concept-card-sep: rgba(222, 211, 191, 0.40);     /* Price/footer separator */
+
+  /* ===== Figma Pricing tokens ===== */
+  --color-price-name: #6E473B;              /* Price card title */
+  --color-price-featured-bg: rgba(190, 134, 70, 0.95);     /* Featured card inner background */
+  --color-price-outer: #E1D4C2;             /* Price card outer layer */
+  --color-price-inner: #ECE8E2;             /* Price card inner layer */
+
+  /* ===== Figma Detail page tokens ===== */
+  --color-detail-body: #554339;             /* Body text on concept detail */
+  --color-price-box-bg: rgba(246, 223, 211, 0.50);   /* Price info box background */
+  --color-price-box-border: rgba(244, 224, 209, 0.60); /* Price info box border */
+
+  /* ===== Figma Dark section tokens ===== */
+  --color-dark-section: #3D2B1F;            /* Dark form section background */
+  --color-eyebrow-dark: #B86B00;            /* Eyebrow on dark backgrounds */
+
+  /* ===== Additional border-radius tokens ===== */
+  --radius-card-concept: 22px;              /* Concept card (Figma exact) */
+  --radius-card-price: 58px;                /* Price card extra-large */
+  --radius-related: 16px;                   /* Related concept cards, location selectors, price info box */
+
+  /* ===== Additional shadow tokens ===== */
+  --shadow-concept-card: 0px 4px 24px 0px rgba(35, 31, 32, 0.06);
+  --shadow-form: 0px 24px 64px 0px rgba(47, 33, 23, 0.22);
+  --shadow-related-card: 0px 4px 16px 0px rgba(35, 31, 32, 0.06);
+
+  /* ===== Figma image placeholder background ===== */
+  --color-img-placeholder: #EBE2C7;
+
+  /* ===== Contact pill glassmorphism ===== */
+  --color-contact-pill-bg: rgba(254, 247, 242, 0.15);
+}

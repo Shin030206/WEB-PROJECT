@@ -1,0 +1,74 @@
+<section class="pricing-page">
+  <!-- Banner -->
+  <div class="pricing-page__banner">
+    <div class="container-custom">
+      <p class="pricing-page__banner-eyebrow">Bảng giá</p>
+      <h1>Minh bạch & rõ ràng</h1>
+      <p>Ba dòng dịch vụ, ba cấp độ. Chọn gói phù hợp với bạn.</p>
+    </div>
+  </div>
+
+  <div class="container-custom pricing-page__content">
+    <!-- Packages -->
+    @for (cat of data.pricingCategories; track cat.id) {
+      <div class="pricing-category" [id]="cat.id">
+        <div class="pricing-category__header">
+          <h2>{{ cat.name }}</h2>
+          <p>{{ cat.description }}</p>
+        </div>
+
+        <div class="pricing-category__tiers">
+          @for (tier of cat.tiers; track tier.name) {
+            <div class="pricing-card" [class.pricing-card--featured]="tier.name === 'Cao Cấp'">
+              @if (tier.name === 'Cao Cấp') {
+                <div class="pricing-card__popular">Phổ biến nhất</div>
+              }
+              <div class="pricing-card__body">
+                <h3 class="pricing-card__name">{{ tier.name }}</h3>
+                <div class="pricing-card__price">
+                  <span class="pricing-card__amount">{{ formatPrice(tier.price) }}</span>
+                </div>
+                <ul class="pricing-card__features">
+                  <li><i class="bi bi-check2"></i> <strong>{{ tier.concepts }}</strong> concept chụp</li>
+                  <li><i class="bi bi-check2"></i> <strong>{{ tier.duration }}</strong> thực hiện</li>
+                  <li><i class="bi bi-check2"></i> {{ tier.makeup }}</li>
+                  <li><i class="bi bi-check2"></i> {{ tier.outfits }}</li>
+                  <li><i class="bi bi-check2"></i> Bàn giao <strong>{{ tier.photos }}</strong></li>
+                  @if (tier.extras) {
+                    <li><i class="bi bi-star-fill"></i> {{ tier.extras }}</li>
+                  }
+                </ul>
+                <a routerLink="/booking" class="pricing-card__btn btn-primary-custom">
+                  Đặt lịch ngay
+                </a>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- Add-on Services -->
+    <div class="pricing-addons">
+      <h2>Dịch vụ giá trị gia tăng</h2>
+      <p class="pricing-addons__subtitle">Bổ sung thêm để hoàn thiện trọn vẹn buổi chụp</p>
+
+      <div class="pricing-addons__grid">
+        @for (svc of data.addonServices; track svc.name) {
+          <div class="pricing-addon-card">
+            <div class="pricing-addon-card__price">
+              {{ formatPrice(svc.price) }}<small>{{ svc.unit }}</small>
+            </div>
+            <h4>{{ svc.name }}</h4>
+            <p>{{ svc.desc }}</p>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Note -->
+    <div class="pricing-note">
+      <p><strong>Lưu ý:</strong> Tất cả mức giá trên là giá tham khảo, được áp dụng cho thời điểm bình thường trong năm. Mức giá chính thức tại từng thời điểm sẽ được công bố công khai trên website. Liên hệ <a href="tel:0396387597">{{ data.phoneNumber }}</a> để được tư vấn chi tiết.</p>
+    </div>
+  </div>
+</section>

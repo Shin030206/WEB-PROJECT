@@ -1,0 +1,129 @@
+<!-- ============================================================
+  KÝ ỨC STUDIO — Trang chủ
+  Hero Slider → Về chúng tôi → Bộ sưu tập nổi bật → CTA đặt lịch
+  ============================================================ -->
+
+<!-- ===== 1. HERO SLIDER ===== -->
+<section class="hero">
+  <div class="hero__carousel">
+    <div class="hero__slides">
+      @for (slide of heroSlides; track slide.image; let i = $index) {
+        <div class="hero__slide" [class.active]="i === currentSlide">
+          <img [src]="'assets/' + slide.image" class="hero__img" alt="Ký Ức Studio" />
+          <div class="hero__overlay"></div>
+        </div>
+      }
+    </div>
+
+    <div class="hero__content container-custom">
+      <p class="hero__eyebrow">— KÝ ỨC STUDIO</p>
+      <h1 class="hero__title">
+        Mỗi Bức Ảnh<br />
+        Là Một Câu Chuyện
+      </h1>
+      <p class="hero__desc">
+        Lưu giữ khoảnh khắc của bạn qua ống kính nghệ thuật, nơi văn hóa
+        Việt giao thoa cùng ánh sáng điện ảnh hiện đại.
+      </p>
+      <div class="hero__actions">
+        <a routerLink="/booking" class="btn-primary-custom">
+          Đặt lịch chụp ngay
+          <span class="btn-primary-custom__icon-circle"><i class="bi bi-arrow-right"></i></span>
+        </a>
+        <a routerLink="/pricing" class="btn-outline-custom hero__btn-outline">Xem gói dịch vụ</a>
+      </div>
+    </div>
+
+    <div class="hero__indicators">
+      @for (slide of heroSlides; track slide.image; let i = $index) {
+        <button
+          type="button"
+          [class.active]="i === currentSlide"
+          (click)="goToSlide(i)"
+          [attr.aria-current]="i === currentSlide ? 'true' : null"
+          [attr.aria-label]="'Slide ' + (i + 1)"
+        ></button>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2. VỀ CHÚNG TÔI ===== -->
+<section class="home-about section--lg">
+  <div class="container-custom">
+    <div class="home-about__grid">
+      <div class="home-about__gallery">
+        @for (img of aboutImages; track img; let i = $index) {
+          <div class="home-about__photo" [class.home-about__photo--tall]="i === 0 || i === 3">
+            <img [src]="'assets/' + img" [alt]="'Ký Ức Studio ' + (i + 1)" loading="lazy" />
+          </div>
+        }
+      </div>
+
+      <div class="home-about__text">
+        <p class="section-label">Về Ký Ức Studio</p>
+        <h2 class="section-heading">
+          "Nơi mỗi phụ nữ Việt<br /><em>tỏa sáng</em>"
+        </h2>
+        <p class="home-about__desc">
+          Ký Ức Studio nảy mầm từ tinh thần trẻ trung, hiện đại, mang văn hóa
+          Việt Nam. Chúng tôi mang đến những set chụp sử dụng kỹ thuật ánh
+          sáng điện ảnh, kết hợp cùng các chất liệu văn hóa Việt được cách
+          điệu tinh tế — nơi mỗi khách hàng được kể câu chuyện của riêng mình.
+        </p>
+        <a routerLink="/about" class="home-about__link">
+          Tìm hiểu thêm về chúng tôi <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3. BỘ SƯU TẬP NỔI BẬT ===== -->
+<section class="home-collections section--lg">
+  <div class="container-custom">
+    <div class="section-header">
+      <p class="section-label">Bộ sưu tập đặc biệt</p>
+      <h2 class="section-heading">5 bộ sưu tập, 5 cung bậc ký ức</h2>
+      <p class="section-desc">
+        Mỗi bộ sưu tập là một hành trình ký ức riêng biệt — chọn câu chuyện
+        phù hợp với bạn.
+      </p>
+    </div>
+
+    <div class="home-collections__grid">
+      @for (col of data.specialCollections; track col.id; let i = $index) {
+        <a
+          [routerLink]="['/collection', col.id]"
+          class="home-collection-card animate-fade-in-up"
+          [style.animation-delay]="i * 100 + 'ms'"
+        >
+          <div class="home-collection-card__media" [style.background]="col.gradient">
+            <img [src]="'assets/' + col.image" [alt]="col.name" loading="lazy" />
+          </div>
+          <div class="home-collection-card__body">
+            <span class="home-collection-card__icon">{{ col.icon }}</span>
+            <h3 class="home-collection-card__name">{{ col.name }}</h3>
+            <p class="home-collection-card__subtitle">{{ col.subtitle }}</p>
+          </div>
+        </a>
+      }
+    </div>
+
+    <div class="home-collections__more">
+      <a routerLink="/concepts" class="btn-outline-custom">Xem tất cả concept</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4. CTA ĐẶT LỊCH ===== -->
+<section class="home-cta">
+  <div class="container-custom home-cta__inner">
+    <p class="home-cta__eyebrow">Bạn sẵn sàng chưa?</p>
+    <h2 class="home-cta__heading">Lưu giữ từng kỷ niệm đẹp của bạn tại đây</h2>
+    <a routerLink="/booking" class="btn-primary-custom btn-primary-custom--lg">
+      Đặt lịch ngay
+      <span class="btn-primary-custom__icon-circle"><i class="bi bi-calendar-check"></i></span>
+    </a>
+  </div>
+</section>
