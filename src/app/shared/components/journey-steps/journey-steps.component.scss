@@ -1,0 +1,53 @@
+.booking-journey {
+  background: var(--color-bg-warm-alt);
+  padding: var(--space-5xl) 0;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+    margin-top: var(--space-3xl);
+  }
+
+  &__card {
+    background: var(--tint-t5);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+  }
+
+  &__number {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-btn-tan);
+    margin-bottom: var(--space-sm);
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-heading-espresso);
+    margin-bottom: var(--space-md);
+    line-height: 1.3;
+  }
+
+  &__desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-light);
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 992px) {
+  .booking-journey__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .booking-journey__grid {
+    grid-template-columns: 1fr;
+  }
+}

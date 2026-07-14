@@ -1,0 +1,46 @@
+<section class="policy-layout">
+  <div class="policy-layout__banner">
+    <div class="container-custom">
+      <p class="policy-layout__eyebrow">— {{ eyebrow }} —</p>
+      <h1 class="policy-layout__heading">
+        {{ titleMain }} <em>{{ titleAccent }}</em>
+      </h1>
+      <p class="policy-layout__update">Cập nhật lần cuối: {{ updateDate }}</p>
+    </div>
+  </div>
+
+  <div class="container-custom policy-layout__body">
+    <aside class="policy-layout__sidebar">
+      @for (item of navItems; track item.tab) {
+        <a [routerLink]="item.link" class="policy-layout__nav-card" [class.active]="item.tab === activeTab">
+          <span class="policy-layout__nav-icon"><i [class]="'bi ' + item.icon"></i></span>
+          <span class="policy-layout__nav-text">
+            <strong>{{ item.title }}</strong>
+            <small>Quy trình đặt lịch &amp; thanh toán</small>
+          </span>
+        </a>
+      }
+    </aside>
+
+    <div class="policy-layout__content">
+      @for (section of sections; track section.title; let i = $index) {
+        <article class="policy-layout__card">
+          <div class="policy-layout__card-head">
+            <span class="policy-layout__card-icon"><i [class]="'bi ' + section.icon"></i></span>
+            <h3>{{ i + 1 }}. {{ section.title }}</h3>
+          </div>
+          @for (p of section.paragraphs; track p) {
+            <p>{{ p }}</p>
+          }
+        </article>
+      }
+
+      <div class="policy-layout__cta">
+        <a routerLink="/booking" class="btn-primary-custom">Đặt lịch chụp ngay <i class="bi bi-arrow-right"></i></a>
+        <a routerLink="/support" class="btn-outline-custom">
+          <i class="bi bi-chat-dots"></i> Trung tâm hỗ trợ
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

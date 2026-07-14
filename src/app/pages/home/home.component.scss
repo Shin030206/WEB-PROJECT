@@ -153,14 +153,13 @@
 
   &__gallery {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.25fr;
     gap: var(--space-md);
   }
 
   &__photo {
     border-radius: var(--radius-lg);
     overflow: hidden;
-    aspect-ratio: 3 / 4;
 
     img {
       width: 100%;
@@ -168,19 +167,16 @@
       object-fit: cover;
     }
 
-    &--tall {
-      aspect-ratio: 3 / 4.6;
-    }
-
-    &:nth-child(2),
-    &:nth-child(3) {
-      margin-top: var(--space-2xl);
-    }
+    &--backdrop { aspect-ratio: 263 / 233; }
+    &--rack { aspect-ratio: 333 / 132; align-self: end; }
+    &--makeup { aspect-ratio: 261 / 147; }
+    &--shoot { aspect-ratio: 333 / 306; align-self: start; }
   }
 
   &__text {
     .section-heading {
       margin-bottom: var(--space-lg);
+      color: var(--color-heading-espresso);
 
       em {
         font-style: italic;
@@ -193,7 +189,11 @@
     font-size: var(--text-base);
     line-height: 1.8;
     color: var(--neutral-grey);
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-lg);
+
+    strong {
+      color: var(--color-heading-espresso);
+    }
   }
 
   &__link {
@@ -209,89 +209,237 @@
     &:hover {
       gap: var(--space-md);
     }
+
+    &--btn {
+      margin-top: var(--space-sm);
+      background: var(--color-btn-tan);
+      color: var(--color-btn-tan-text);
+      padding: 0.85rem 1.5rem;
+      border-radius: var(--radius-full);
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
   }
 }
 
-/* ===== 3. BỘ SƯU TẬP NỔI BẬT ===== */
-.home-collections {
-  background: var(--color-bg-warm);
+/* ===== 3. GÓI DỊCH VỤ ===== */
+.home-packages {
+  background: var(--color-section-espresso);
+
+  .section-label--light {
+    color: var(--color-accent-tan);
+
+    &::before {
+      background: var(--color-accent-tan);
+    }
+  }
+
+  .section-heading--light {
+    color: var(--neutral-white);
+
+    em {
+      font-style: normal;
+      color: var(--color-accent-tan);
+    }
+  }
+
+  .section-desc--light {
+    color: var(--color-bg-warm-alt);
+  }
 
   &__grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: var(--space-lg);
-    margin-bottom: var(--space-2xl);
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+    margin-top: var(--space-3xl);
   }
 
-  &__more {
+  &__note {
     text-align: center;
+    color: var(--color-bg-warm-alt);
+    font-size: var(--text-sm);
+    margin-top: var(--space-3xl);
   }
 }
 
-.home-collection-card {
-  display: block;
-  position: relative;
+.package-card {
+  background: var(--color-card-blush);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  text-decoration: none;
-  aspect-ratio: 3 / 4;
-  opacity: 0;
-  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  transition: transform var(--transition-spring), box-shadow var(--transition-spring);
-
-  &:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-card-hover);
-
-    img { transform: scale(1.06); }
-  }
 
   &__media {
-    position: absolute;
-    inset: 0;
+    position: relative;
+    aspect-ratio: 300 / 309;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0.85;
     }
   }
 
-  &__body {
+  &__price {
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 2;
-    padding: var(--space-lg) var(--space-md);
+    left: var(--space-md);
+    bottom: var(--space-md);
+    display: flex;
+    flex-direction: column;
     color: var(--neutral-white);
   }
 
-  &__icon {
-    display: block;
-    font-size: 1.25rem;
-    margin-bottom: var(--space-xs);
-    opacity: 0.9;
+  &__price-old {
+    font-size: var(--text-xs);
+    text-decoration: line-through;
+    opacity: 0.8;
+  }
+
+  &__price-new {
+    font-size: var(--text-lg);
+    font-weight: 700;
+  }
+
+  &__body {
+    padding: var(--space-lg);
+  }
+
+  &__eyebrow {
+    font-family: var(--font-display);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--color-text-name);
+    letter-spacing: 0.02em;
+    margin-bottom: var(--space-2xs);
   }
 
   &__name {
     font-family: var(--font-display);
-    font-size: var(--text-lg);
+    font-size: var(--text-xl);
     font-weight: 600;
-    margin: 0 0 4px;
-    line-height: 1.25;
+    color: var(--neutral-black);
+    margin-bottom: var(--space-sm);
   }
 
-  &__subtitle {
-    font-family: var(--font-concept-desc);
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
     font-size: var(--text-xs);
-    opacity: 0.85;
-    margin: 0;
+    color: var(--color-text-name);
+    margin-bottom: var(--space-md);
+
+    i:not(:first-child) {
+      margin-left: var(--space-sm);
+    }
+  }
+
+  &__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: var(--text-sm);
+      color: var(--color-text-name);
+    }
+
+    i {
+      color: var(--brand-primary);
+    }
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: var(--color-btn-tan);
+    color: var(--color-btn-tan-text);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    padding: 0.85rem 1.5rem;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: opacity var(--transition-fast);
+
+    &:hover {
+      opacity: 0.9;
+    }
   }
 }
 
-/* ===== 4. CTA ĐẶT LỊCH ===== */
+/* ===== 4. BST — CÂU CHUYỆN KỂ BẰNG ÁNH MẮT ===== */
+.home-bst {
+  background: var(--color-bg-warm-alt);
+
+  &__filters {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+  }
+
+  &__filter {
+    border: none;
+    background: var(--color-card-blush);
+    color: var(--color-text-name);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &.active {
+      background: var(--color-heading-espresso);
+      color: var(--neutral-white);
+    }
+  }
+
+  &__grid {
+    column-count: 3;
+    column-gap: var(--space-lg);
+    margin-top: var(--space-3xl);
+  }
+
+  &__photo {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    break-inside: avoid;
+    margin-bottom: var(--space-lg);
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+
+    &:hover img {
+      transform: scale(1.05);
+    }
+  }
+
+  &__more {
+    text-align: center;
+    margin-top: var(--space-3xl);
+  }
+}
+
+/* ===== 5. CTA ĐẶT LỊCH ===== */
 .home-cta {
   background: var(--color-dark-section);
   padding: var(--space-4xl) 0;
@@ -318,6 +466,12 @@
     margin-bottom: var(--space-2xl);
     line-height: 1.25;
   }
+
+  &__form {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+  }
 }
 
 /* ============================================================
@@ -333,8 +487,12 @@
     order: -1;
   }
 
-  .home-collections__grid {
-    grid-template-columns: repeat(3, 1fr);
+  .home-packages__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .home-bst__grid {
+    column-count: 3;
   }
 }
 
@@ -343,20 +501,23 @@
     max-width: 90%;
   }
 
-  .home-about__photo:nth-child(2),
-  .home-about__photo:nth-child(3) {
-    margin-top: 0;
+  .home-about__gallery {
+    grid-template-columns: 1fr;
   }
 
-  .home-collections__grid {
-    grid-template-columns: repeat(2, 1fr);
+  .home-packages__grid {
+    grid-template-columns: 1fr;
+    max-width: 340px;
+    margin-inline: auto;
+  }
+
+  .home-bst__grid {
+    column-count: 2;
   }
 }
 
 @media (max-width: 480px) {
-  .home-collections__grid {
-    grid-template-columns: 1fr;
-    max-width: 320px;
-    margin-inline: auto;
+  .home-bst__filters {
+    flex-wrap: wrap;
   }
 }

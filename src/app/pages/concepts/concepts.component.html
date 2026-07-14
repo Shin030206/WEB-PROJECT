@@ -1,7 +1,7 @@
 <!-- ============================================================
   KÝ ỨC STUDIO — Trang Concept
-  Overview: Hero "129+ concept" + 6 thẻ danh mục + CTA + Form tư vấn
-  Filtered (?category=X): Banner + filter tabs + grid concept lẻ
+  Overview: Hero "100+ concept" + thẻ danh mục + Form đặt lịch
+  Filtered (?category=X): filter tabs + grid concept lẻ
   ============================================================ -->
 
 @if (showOverview) {
@@ -12,7 +12,7 @@
 
     <div class="concept-hero__content container-custom">
       <h1 class="concept-hero__title animate-fade-in-up">
-        129+ concept<br />
+        100+ concept<br />
         <span class="concept-hero__title-em">cho câu chuyện của bạn</span>
       </h1>
       <p class="concept-hero__desc animate-fade-in-up delay-200">
@@ -22,7 +22,7 @@
     </div>
   </section>
 
-  <!-- ===== 2. CONCEPT GRID — 6 cards (3×2) ===== -->
+  <!-- ===== 2. CONCEPT GRID — 5 cards (3+2) ===== -->
   <section class="concept-grid-section section--lg">
     <div class="container-custom">
       <div class="concept-grid">
@@ -36,171 +36,12 @@
       </div>
     </div>
   </section>
-
-  <!-- CTA: Không tìm thấy concept ưng ý? -->
-  <section class="concept-cta animate-fade-in-up">
-    <div class="concept-cta__text">
-      <h3 class="concept-cta__heading">Không tìm thấy concept ưng ý?</h3>
-      <p class="concept-cta__desc">
-        Ekip Ký Ức tư vấn riêng — gợi ý concept phù hợp với gu và câu chuyện của bạn.
-      </p>
-    </div>
-    <a routerLink="/booking" class="btn-primary-custom">
-      Đặt lịch tư vấn
-      <span class="btn-primary-custom__icon-circle"><i class="bi bi-arrow-right"></i></span>
-    </a>
-  </section>
-
-  <!-- ===== 3. CONSULTATION FORM — dark background ===== -->
-  <section class="consultation" id="consultation">
-    <div class="consultation__bg">
-      <div class="container-custom container-custom--narrow">
-        <div class="consultation__header">
-          <p class="consultation__eyebrow">Khi bạn sẵn sàng</p>
-          <h2 class="consultation__heading">
-            Câu chuyện của bạn<br />
-            <em class="consultation__heading-em">bắt đầu ở đây</em>
-          </h2>
-          <p class="consultation__subtitle">
-            Để lại thông tin, đội ngũ Ký Ức Studio sẽ liên hệ tư vấn trong 30 phút.
-          </p>
-        </div>
-
-        <form class="consultation__form animate-fade-in-up" #consultForm="ngForm" (ngSubmit)="submitConsultation(consultForm)">
-          <div class="consultation__row">
-            <div class="consultation__field">
-              <label class="consultation__label">Họ và tên <span>*</span></label>
-              <input
-                type="text"
-                class="consultation__input"
-                name="name"
-                [(ngModel)]="consultData.name"
-                placeholder="Nguyễn Văn A"
-                required
-              />
-            </div>
-            <div class="consultation__field">
-              <label class="consultation__label">Số điện thoại <span>*</span></label>
-              <input
-                type="tel"
-                class="consultation__input"
-                name="phone"
-                [(ngModel)]="consultData.phone"
-                placeholder="0912 345 678"
-                required
-              />
-            </div>
-          </div>
-
-          <div class="consultation__field consultation__field--full">
-            <label class="consultation__label">Concept yêu thích</label>
-            <select class="consultation__input" name="concept" [(ngModel)]="consultData.concept">
-              <option value="">-- Chọn dịch vụ --</option>
-              <option value="Chân dung">Chân dung</option>
-              <option value="Couple">Couple</option>
-              <option value="Gia đình">Gia đình</option>
-              <option value="Mẹ và con">Mẹ và con</option>
-              <option value="Bạn bè · Sinh nhật">Bạn bè · Sinh nhật</option>
-              <option value="Áo dài">Áo dài</option>
-            </select>
-          </div>
-
-          <div class="consultation__field consultation__field--full">
-            <label class="consultation__label">Ý tưởng concept cụ thể (nếu có)</label>
-            <input
-              type="text"
-              class="consultation__input"
-              name="idea"
-              [(ngModel)]="consultData.idea"
-              placeholder="VD: Áo dài sen, Mẹ và con, Retro Sài Gòn xưa..."
-            />
-          </div>
-
-          <div class="consultation__field consultation__field--full">
-            <label class="consultation__label">Cơ sở gần nhất</label>
-            <div class="consultation__location-options">
-              <button
-                type="button"
-                class="consultation__location-option"
-                [class.active]="consultData.location === 'Hà Nội'"
-                (click)="consultData.location = 'Hà Nội'"
-              >
-                <i class="bi bi-geo-alt"></i>
-                <span>
-                  <strong>Hà Nội</strong>
-                  <small>Cơ sở Hà Nội</small>
-                </span>
-              </button>
-              <button
-                type="button"
-                class="consultation__location-option"
-                [class.active]="consultData.location === 'Sài Gòn'"
-                (click)="consultData.location = 'Sài Gòn'"
-              >
-                <i class="bi bi-geo-alt"></i>
-                <span>
-                  <strong>TP Hồ Chí Minh</strong>
-                  <small>Cơ sở Sài Gòn</small>
-                </span>
-              </button>
-            </div>
-          </div>
-
-          <div class="consultation__field consultation__field--full">
-            <label class="consultation__label">Ghi chú thêm <span class="consultation__label-optional">(tuỳ chọn)</span></label>
-            <textarea
-              class="consultation__textarea"
-              name="note"
-              [(ngModel)]="consultData.note"
-              placeholder="VD: Muốn chụp dịp sinh nhật, cần concept Tết, đi cùng bé 3 tuổi..."
-              rows="2"
-            ></textarea>
-          </div>
-
-          <button type="submit" class="btn-primary-custom btn-primary-custom--lg consultation__submit" [disabled]="consultSubmitted">
-            @if (!consultSubmitted) { <span>Để ekip liên hệ với bạn</span> }
-            @if (consultSubmitted) { <span><i class="bi bi-check-circle"></i> Đã gửi thành công!</span> }
-            <span class="btn-primary-custom__icon-circle"><i class="bi bi-arrow-right"></i></span>
-          </button>
-          <p class="consultation__disclaimer">
-            Ký Ức Studio cam kết chỉ gọi một cuộc để tư vấn. Không spam, không làm phiền nếu bạn chưa sẵn sàng.
-          </p>
-
-          <div class="consultation__contacts">
-            <span class="consultation__contacts-label">hoặc liên hệ qua</span>
-            <div class="consultation__contacts-pills">
-              <a [href]="'https://zalo.me/' + data.phoneNumber" target="_blank" class="consultation__contact-pill consultation__contact-pill--zalo">
-                <i class="bi bi-chat-dots"></i> Zalo
-              </a>
-              <a href="https://m.me/kyucstudio" target="_blank" class="consultation__contact-pill consultation__contact-pill--messenger">
-                <i class="bi bi-messenger"></i> Messenger
-              </a>
-              <a [href]="'tel:' + data.phoneNumber" class="consultation__contact-pill consultation__contact-pill--hotline">
-                <i class="bi bi-telephone"></i> {{ data.phoneNumber }}
-              </a>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
 } @else {
   <!-- ===== FILTERED VIEW — /concepts?category=X ===== -->
   <section class="concepts-page">
-    <div class="concepts-page__banner">
-      <div class="container-custom">
-        <p class="concepts-page__banner-label">Bộ sưu tập</p>
-        <h1 class="concepts-page__banner-title">Concept Collection 2026</h1>
-        <p class="concepts-page__banner-desc">
-          129+ concept cho câu chuyện của bạn. Mỗi concept là một phong cách, một câu chuyện.
-          Duyệt theo nhóm chụp — chọn concept phù hợp, rồi đặt lịch.
-        </p>
-      </div>
-    </div>
-
     <div class="container-custom">
       <button class="concepts-page__overview-back" (click)="backToOverview()">
-        <i class="bi bi-arrow-left"></i> Quay lại tất cả nhóm
+        <i class="bi bi-arrow-left"></i> Quay lại tất cả concept
       </button>
 
       <!-- Filter Tabs -->
@@ -246,13 +87,19 @@
           </button>
         </div>
       }
-
-      <!-- Bottom CTA -->
-      <div class="concepts-page__cta">
-        <h3>Không tìm thấy concept ưng ý?</h3>
-        <p>Ekip Ký Ức tư vấn riêng — gợi ý concept phù hợp với gu và câu chuyện của bạn.</p>
-        <a routerLink="/booking" class="btn-primary-custom">Đặt lịch tư vấn <i class="bi bi-arrow-right"></i></a>
-      </div>
     </div>
   </section>
 }
+
+<!-- ===== CTA — Khi bạn sẵn sàng / Đặt lịch (dùng chung cho cả 2 chế độ) ===== -->
+<section class="concept-page-cta">
+  <div class="container-custom">
+    <p class="concept-page-cta__eyebrow">Khi bạn sẵn sàng</p>
+    <h2 class="concept-page-cta__heading">
+      Câu Chuyện Của Bạn <em>Bắt Đầu Ở Đây</em>
+    </h2>
+    <div class="concept-page-cta__form">
+      <app-booking-form />
+    </div>
+  </div>
+</section>

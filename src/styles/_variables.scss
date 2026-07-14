@@ -194,4 +194,24 @@
 
   /* ===== Contact pill glassmorphism ===== */
   --color-contact-pill-bg: rgba(254, 247, 242, 0.15);
+
+  /* ===== Figma "Trang chủ" update tokens (Gói dịch vụ / BST) ===== */
+  --color-bg-warm-alt: #F5EFE6;             /* Về chúng tôi / BST section background */
+  --color-heading-espresso: #4F332B;        /* Large serif heading on light bg */
+  --color-section-espresso: #241007;        /* Gói dịch vụ dark section background */
+  --color-card-blush: #FFEBE5;              /* Package card background */
+  --color-btn-tan: #C9A27E;                 /* Secondary pill button background */
+  --color-btn-tan-text: #281810;            /* Text on tan button */
+  --color-accent-tan: #BF8371;              /* Accent text on dark section */
+
+  /* ===== Figma Footer tokens ===== */
+  --color-footer-bg: #2F2117;               /* Footer background — warm espresso, not pure black */
+  --color-footer-gold: #D58C3B;             /* Footer logo / tagline / column headers / phone */
+
+  /* ===== Figma Header tokens ===== */
+  --color-header-bg: #F5EFE6;               /* Header background — warm cream, not white */
+  --color-header-btn-register: #6E473B;     /* "Đăng ký" button background */
+  --color-header-btn-book: #A78D78;         /* "Đặt lịch" button background */
+  --color-header-nav-text: #6E473B;         /* Nav link resting color */
+  --color-header-nav-hover: #DAB787;        /* Nav link hover/active color */
 }

@@ -3,14 +3,14 @@
   top: 0; left: 0; right: 0;
   z-index: var(--z-nav);
   height: var(--header-height);
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(245, 239, 230, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 
   &.scrolled {
-    background: rgba(255, 255, 255, 0.94);
+    background: rgba(245, 239, 230, 0.97);
     border-bottom-color: var(--color-border-light);
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
   }
@@ -27,29 +27,14 @@
   .header__logo {
     text-decoration: none;
     flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    line-height: 1.15;
-    gap: 1px;
     z-index: calc(var(--z-nav) + 2);
-  }
-
-  .header__logo-main {
     font-family: var(--font-display);
-    font-size: var(--text-xl);
+    font-size: var(--text-lg);
     font-weight: 700;
-    color: var(--neutral-black);
-    letter-spacing: 0.02em;
-  }
-
-  .header__logo-sub {
-    font-family: var(--font-display);
-    font-size: var(--text-2xs);
-    font-weight: 400;
-    color: var(--neutral-l-grey);
-    letter-spacing: 0.12em;
+    color: var(--neutral-d-grey);
+    letter-spacing: 0.03em;
     text-transform: uppercase;
+    white-space: nowrap;
   }
 
   /* ---- Navigation (centered) ---- */
@@ -69,7 +54,7 @@
     padding: 0;
 
     a {
-      color: var(--neutral-d-grey);
+      color: var(--color-header-nav-text);
       font-size: var(--text-sm);
       font-weight: 500;
       text-decoration: none;
@@ -86,7 +71,7 @@
         left: 0;
         width: 100%;
         height: 2px;
-        background: var(--brand-primary);
+        background: var(--color-header-nav-hover);
         transform: scaleX(0);
         transform-origin: right;
         transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -94,7 +79,7 @@
 
       &:hover,
       &.active {
-        color: var(--neutral-black);
+        color: var(--color-header-nav-hover);
 
         &::after {
           transform: scaleX(1);
@@ -102,6 +87,78 @@
         }
       }
     }
+  }
+
+  /* ---- Nav dropdown (Hỗ trợ / Chính sách) ---- */
+  .header__nav-item--dropdown {
+    position: relative;
+
+    > a i {
+      font-size: 0.65em;
+      margin-left: 2px;
+      transition: transform var(--transition-fast);
+    }
+
+    &:hover > a i {
+      transform: rotate(180deg);
+    }
+  }
+
+  /* Outer wrapper starts flush against the trigger (no gap) so the mouse
+     never leaves a hoverable box on the way down — the 14px breathing room
+     is padding-top on this invisible bridge, not a position offset, which
+     would otherwise create a dead zone that drops :hover before the menu
+     can be reached. */
+  .header__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 14px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    /* Hiding is delayed slightly (grace period) so a brief gap in mouse
+       movement while crossing into the menu doesn't close it prematurely.
+       Showing stays instant — see the :hover rule below, which resets the
+       delay to 0. */
+    transition: opacity 0.15s ease 0.15s, visibility 0.15s ease 0.15s;
+    z-index: calc(var(--z-nav) + 1);
+  }
+
+  .header__dropdown-menu {
+    min-width: 220px;
+    background: var(--neutral-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem;
+
+    li { margin: 0; }
+
+    a {
+      display: block;
+      padding: 0.6rem 0.75rem !important;
+      font-size: var(--text-sm);
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+
+      &::after { display: none; }
+
+      &:hover {
+        background: var(--color-bg-warm-alt);
+        color: var(--brand-primary);
+      }
+    }
+  }
+
+  .header__nav-item--dropdown:hover .header__dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    transition-delay: 0s;
   }
 
   /* ---- Mobile CTA (hidden on desktop) ---- */
@@ -149,9 +206,9 @@
     }
 
     &--dark {
-      background: var(--brand-secondary);
+      background: var(--color-header-btn-register);
       color: var(--neutral-white);
-      border: 1px solid var(--brand-secondary);
+      border: 1px solid var(--color-header-btn-register);
 
       &:hover {
         background: var(--neutral-black);
@@ -160,13 +217,12 @@
     }
 
     &--light {
-      background: var(--tint-t4);
-      color: var(--brand-secondary);
-      border: 1px solid var(--tint-t4);
+      background: var(--color-header-btn-book);
+      color: var(--neutral-white);
+      border: 1px solid var(--color-header-btn-book);
 
       &:hover {
         background: var(--shade-s2);
-        color: var(--neutral-white);
         transform: translateY(-1px);
         box-shadow: var(--shadow-button);
       }
@@ -269,6 +325,33 @@
         &.active {
           color: var(--brand-primary);
         }
+      }
+    }
+
+    .header__nav-item--dropdown > a i {
+      display: none;
+    }
+
+    .header__dropdown {
+      position: static;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+      transform: none;
+      padding-top: 0;
+    }
+
+    .header__dropdown-menu {
+      box-shadow: none;
+      border: none;
+      background: none;
+      padding: 0 0 0 var(--space-md);
+      margin-top: 4px;
+
+      a {
+        color: var(--neutral-l-grey) !important;
+        font-size: var(--text-sm) !important;
+        padding: var(--space-xs) 0 !important;
       }
     }
 

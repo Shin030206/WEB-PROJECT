@@ -79,7 +79,6 @@ export class DataService {
     'Couple',
     'Gia đình',
     'Mẹ và con',
-    'Bạn bè · Sinh nhật',
     'Áo dài',
   ];
 

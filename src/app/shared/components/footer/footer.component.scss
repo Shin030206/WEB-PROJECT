@@ -1,5 +1,5 @@
 .footer {
-  background: var(--neutral-black);
+  background: var(--color-footer-bg);
   color: var(--neutral-silver);
   margin-top: auto;
   position: relative;
@@ -41,23 +41,22 @@
       font-family: var(--font-display);
       font-size: var(--text-xl);
       font-weight: 600;
-      color: var(--neutral-white);
+      color: var(--color-footer-gold);
       letter-spacing: 0.02em;
     }
   }
 
   .footer__tagline {
-    color: var(--brand-primary);
+    color: var(--color-footer-gold);
     font-style: italic;
     font-family: var(--font-display);
     font-size: var(--text-sm);
     margin-bottom: var(--space-md);
-    opacity: 0.9;
   }
 
   .footer__desc {
     font-size: var(--text-xs);
-    color: rgba(245, 247, 250, 0.5);
+    color: rgba(245, 247, 250, 0.65);
     line-height: 1.9;
     margin-bottom: var(--space-xl);
     max-width: 280px;
@@ -94,26 +93,15 @@
   /* ---- Columns ---- */
   .footer__col {
     h4 {
-      font-family: var(--font-body);
-      font-size: var(--text-2xs);
+      font-family: var(--font-display);
+      font-size: var(--text-xs);
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--neutral-silver);
+      letter-spacing: 0.1em;
+      color: var(--color-footer-gold);
       margin-bottom: var(--space-lg);
       position: relative;
       padding-bottom: var(--space-sm);
-
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 20px;
-        height: 1px;
-        background: var(--brand-primary);
-        opacity: 0.4;
-      }
     }
 
     ul {
@@ -123,7 +111,7 @@
         margin-bottom: var(--space-sm);
 
         a {
-          color: rgba(245, 247, 250, 0.4);
+          color: rgba(245, 247, 250, 0.65);
           font-size: var(--text-xs);
           text-decoration: none;
           transition: all 0.25s ease;
@@ -131,7 +119,7 @@
           display: inline-block;
 
           &:hover {
-            color: var(--brand-primary);
+            color: var(--color-footer-gold);
             transform: translateX(2px);
           }
         }
@@ -154,7 +142,7 @@
 
   .footer__detail-link {
     font-size: var(--text-2xs);
-    color: var(--brand-primary);
+    color: var(--color-footer-gold);
     text-decoration: none;
     letter-spacing: 0.04em;
     transition: opacity 0.2s ease;
@@ -171,7 +159,7 @@
       display: flex;
       align-items: center;
       gap: var(--space-xs);
-      color: var(--neutral-silver);
+      color: var(--color-footer-gold);
       font-weight: 400;
       font-size: var(--text-xs);
       text-decoration: none;
@@ -182,7 +170,7 @@
       }
 
       i {
-        color: var(--brand-primary);
+        color: var(--color-footer-gold);
         font-size: 0.8rem;
       }
     }
@@ -203,7 +191,7 @@
 
     p {
       font-size: var(--text-2xs);
-      color: rgba(245, 247, 250, 0.3);
+      color: rgba(245, 247, 250, 0.5);
       margin: 0;
     }
   }
@@ -216,12 +204,12 @@
 
     a {
       font-size: var(--text-2xs);
-      color: rgba(245, 247, 250, 0.3);
+      color: rgba(245, 247, 250, 0.5);
       text-decoration: none;
       transition: color var(--transition-fast);
 
       &:hover {
-        color: var(--brand-primary);
+        color: var(--color-footer-gold);
       }
     }
   }

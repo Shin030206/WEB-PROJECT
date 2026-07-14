@@ -1,0 +1,18 @@
+<div class="booking-journey">
+  <div class="container-custom">
+    <div class="section-header">
+      <p class="section-label">Hành trình bốn bước</p>
+      <h2 class="section-heading">Nhẹ Nhàng Và Rõ Ràng</h2>
+    </div>
+
+    <div class="booking-journey__grid">
+      @for (step of journeySteps; track step.number) {
+        <div class="booking-journey__card">
+          <span class="booking-journey__number">{{ step.number }}</span>
+          <h3 class="booking-journey__title">{{ step.title }}</h3>
+          <p class="booking-journey__desc">{{ step.desc }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>

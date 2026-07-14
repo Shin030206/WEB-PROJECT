@@ -1,8 +1,7 @@
 <header class="header" [class.scrolled]="isScrolled">
   <div class="header__inner container-custom">
     <a routerLink="/" class="header__logo" (click)="closeMobileMenu()">
-      <span class="header__logo-main">Ký Ức</span>
-      <span class="header__logo-sub">Studio</span>
+      Ký Ức Studio
     </a>
 
     <nav class="header__nav" [class.open]="isMobileMenuOpen">
@@ -11,8 +10,29 @@
         <li><a routerLink="/pricing" routerLinkActive="active" (click)="closeMobileMenu()">Bảng giá</a></li>
         <li><a routerLink="/gallery" routerLinkActive="active" (click)="closeMobileMenu()">Bộ sưu tập</a></li>
         <li><a routerLink="/concepts" routerLinkActive="active" (click)="closeMobileMenu()">Concept</a></li>
-        <li><a routerLink="/support" routerLinkActive="active" (click)="closeMobileMenu()">Hỗ trợ</a></li>
-        <li><a routerLink="/policy" routerLinkActive="active" (click)="closeMobileMenu()">Chính sách</a></li>
+        <li class="header__nav-item--dropdown">
+          <a routerLink="/support" routerLinkActive="active" (click)="closeMobileMenu()">
+            Hỗ trợ <i class="bi bi-chevron-down"></i>
+          </a>
+          <div class="header__dropdown">
+            <ul class="header__dropdown-menu">
+              <li><a routerLink="/support" (click)="closeMobileMenu()">Trung tâm hỗ trợ</a></li>
+              <li><a routerLink="/contact" (click)="closeMobileMenu()">Liên hệ</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="header__nav-item--dropdown">
+          <a routerLink="/policy" routerLinkActive="active" (click)="closeMobileMenu()">
+            Chính sách <i class="bi bi-chevron-down"></i>
+          </a>
+          <div class="header__dropdown">
+            <ul class="header__dropdown-menu">
+              <li><a routerLink="/policy" (click)="closeMobileMenu()">Chính sách hoạt động</a></li>
+              <li><a routerLink="/terms" (click)="closeMobileMenu()">Điều khoản &amp; điều kiện</a></li>
+              <li><a routerLink="/privacy" (click)="closeMobileMenu()">Chính sách bảo mật</a></li>
+            </ul>
+          </div>
+        </li>
         <li><a routerLink="/about" routerLinkActive="active" (click)="closeMobileMenu()">Về chúng tôi</a></li>
       </ul>
       <div class="header__mobile-cta">

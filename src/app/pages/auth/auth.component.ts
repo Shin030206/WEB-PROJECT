@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -11,41 +12,59 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 })
 export class AuthComponent implements OnInit {
   isLogin = true;
-  showOtp = false;
   submitted = false;
+  loading = false;
+  errorMessage = '';
 
   loginData = { phone: '', password: '' };
   registerData = {
-    name: '', phone: '', password: '', confirmPassword: '', otp: ''
+    name: '', email: '', phone: '', password: '', confirmPassword: '', agree: false
   };
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private auth: AuthService) {}
 
   ngOnInit() {
     this.isLogin = this.route.snapshot.queryParamMap.get('mode') !== 'register';
   }
 
   toggleMode() {
-    this.isLogin = !this.isLogin;
-    this.showOtp = false;
-    this.submitted = false;
+    this.setMode(!this.isLogin);
   }
 
-  onLogin(form: NgForm) {
-    if (form.valid) {
+  setMode(isLogin: boolean) {
+    this.isLogin = isLogin;
+    this.submitted = false;
+    this.errorMessage = '';
+  }
+
+  async onLogin(form: NgForm) {
+    if (!form.valid) return;
+
+    this.loading = true;
+    this.errorMessage = '';
+    try {
+      await this.auth.login(this.loginData);
       this.submitted = true;
-      console.log('Login:', this.loginData);
+    } catch (err) {
+      this.errorMessage = err instanceof Error ? err.message : 'Đăng nhập thất bại, vui lòng thử lại';
+    } finally {
+      this.loading = false;
     }
   }
 
-  onRegister(form: NgForm) {
-    if (form.valid && this.registerData.password === this.registerData.confirmPassword) {
-      if (!this.showOtp) {
-        this.showOtp = true;
-      } else {
-        this.submitted = true;
-        console.log('Register:', this.registerData);
-      }
+  async onRegister(form: NgForm) {
+    if (!form.valid || this.registerData.password !== this.registerData.confirmPassword) return;
+
+    this.loading = true;
+    this.errorMessage = '';
+    try {
+      const { name, email, phone, password } = this.registerData;
+      await this.auth.register({ name, email, phone, password });
+      this.submitted = true;
+    } catch (err) {
+      this.errorMessage = err instanceof Error ? err.message : 'Đăng ký thất bại, vui lòng thử lại';
+    } finally {
+      this.loading = false;
     }
   }
 }

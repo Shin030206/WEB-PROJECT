@@ -53,77 +53,131 @@
   <div class="container-custom">
     <div class="home-about__grid">
       <div class="home-about__gallery">
-        @for (img of aboutImages; track img; let i = $index) {
-          <div class="home-about__photo" [class.home-about__photo--tall]="i === 0 || i === 3">
-            <img [src]="'assets/' + img" [alt]="'Ký Ức Studio ' + (i + 1)" loading="lazy" />
+        @for (photo of aboutPhotos; track photo.image) {
+          <div class="home-about__photo" [class]="'home-about__photo--' + photo.variant">
+            <img [src]="'assets/' + photo.image" [alt]="photo.alt" loading="lazy" />
           </div>
         }
       </div>
 
       <div class="home-about__text">
-        <p class="section-label">Về Ký Ức Studio</p>
-        <h2 class="section-heading">
-          "Nơi mỗi phụ nữ Việt<br /><em>tỏa sáng</em>"
-        </h2>
+        <p class="section-label">— Về chúng tôi</p>
+        <h2 class="section-heading">Nơi Câu Chuyện Của Bạn Bắt Đầu</h2>
         <p class="home-about__desc">
-          Ký Ức Studio nảy mầm từ tinh thần trẻ trung, hiện đại, mang văn hóa
-          Việt Nam. Chúng tôi mang đến những set chụp sử dụng kỹ thuật ánh
-          sáng điện ảnh, kết hợp cùng các chất liệu văn hóa Việt được cách
-          điệu tinh tế — nơi mỗi khách hàng được kể câu chuyện của riêng mình.
+          Ký Ức Studio ra đời cuối năm 2024 với sứ mệnh giản dị nhưng sâu sắc:
+          <strong>biến mỗi bức ảnh thành một câu chuyện ý nghĩa.</strong>
+          Chúng tôi tin rằng vẻ đẹp đích thực nằm trong sự chân thật — và
+          nhiệm vụ của chúng tôi là khai thác, tôn vinh vẻ đẹp ấy.
         </p>
-        <a routerLink="/about" class="home-about__link">
-          Tìm hiểu thêm về chúng tôi <i class="bi bi-arrow-right"></i>
+        <p class="home-about__desc">
+          Dù chỉ mới hơn 1 năm hoạt động, đội ngũ 5+ chuyên gia của chúng tôi
+          bao gồm nhiếp ảnh gia, makeup artist và stylist đã thực hiện hơn
+          500 bộ ảnh, nhận được sự yêu mến từ đông đảo khách hàng tại TP.HCM
+          và Hà Nội.
+        </p>
+        <a routerLink="/pricing" class="home-about__link home-about__link--btn">
+          Khám phá gói dịch vụ <i class="bi bi-arrow-right"></i>
         </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== 3. BỘ SƯU TẬP NỔI BẬT ===== -->
-<section class="home-collections section--lg">
+<!-- ===== 3. GÓI DỊCH VỤ ===== -->
+<section class="home-packages section--lg">
   <div class="container-custom">
     <div class="section-header">
-      <p class="section-label">Bộ sưu tập đặc biệt</p>
-      <h2 class="section-heading">5 bộ sưu tập, 5 cung bậc ký ức</h2>
-      <p class="section-desc">
-        Mỗi bộ sưu tập là một hành trình ký ức riêng biệt — chọn câu chuyện
-        phù hợp với bạn.
+      <p class="section-label section-label--light">— Gói dịch vụ</p>
+      <h2 class="section-heading section-heading--light">
+        Chọn Câu Chuyện <em>Của Riêng Bạn</em>
+      </h2>
+      <p class="section-desc section-desc--light">
+        Mỗi gói dịch vụ là một hành trình trải nghiệm được thiết kế để tôn
+        vinh vẻ đẹp độc đáo của bạn.
       </p>
     </div>
 
-    <div class="home-collections__grid">
-      @for (col of data.specialCollections; track col.id; let i = $index) {
-        <a
-          [routerLink]="['/collection', col.id]"
-          class="home-collection-card animate-fade-in-up"
-          [style.animation-delay]="i * 100 + 'ms'"
-        >
-          <div class="home-collection-card__media" [style.background]="col.gradient">
-            <img [src]="'assets/' + col.image" [alt]="col.name" loading="lazy" />
+    <div class="home-packages__grid">
+      @for (pkg of packages; track pkg.id) {
+        <div class="package-card">
+          <div class="package-card__media">
+            <img [src]="'assets/' + pkg.image" [alt]="pkg.name" loading="lazy" />
+            <div class="package-card__price">
+              <span class="package-card__price-old">{{ pkg.priceOld }}</span>
+              <span class="package-card__price-new">{{ pkg.priceNew }}</span>
+            </div>
           </div>
-          <div class="home-collection-card__body">
-            <span class="home-collection-card__icon">{{ col.icon }}</span>
-            <h3 class="home-collection-card__name">{{ col.name }}</h3>
-            <p class="home-collection-card__subtitle">{{ col.subtitle }}</p>
+          <div class="package-card__body">
+            <p class="package-card__eyebrow">{{ pkg.eyebrow }}</p>
+            <h3 class="package-card__name">{{ pkg.name }}</h3>
+            <p class="package-card__meta">
+              <i class="bi bi-clock"></i> {{ pkg.duration }}
+              <i class="bi bi-image"></i> {{ pkg.photoCount }}
+            </p>
+            <ul class="package-card__features">
+              @for (feature of pkg.features; track feature) {
+                <li><i class="bi bi-check2"></i> {{ feature }}</li>
+              }
+            </ul>
+            <a routerLink="/booking" class="package-card__btn">Đặt lịch gói này →</a>
           </div>
-        </a>
+        </div>
       }
     </div>
 
-    <div class="home-collections__more">
-      <a routerLink="/concepts" class="btn-outline-custom">Xem tất cả concept</a>
+    <p class="home-packages__note">
+      Tất cả gói đã bao gồm: trang phục, makeup, chụp ảnh & chỉnh sửa. Giá có
+      thể thương lượng theo yêu cầu đặc biệt.
+    </p>
+  </div>
+</section>
+
+<!-- ===== 4. BST — CÂU CHUYỆN KỂ BẰNG ÁNH MẮT ===== -->
+<section class="home-bst section--lg">
+  <div class="container-custom">
+    <div class="section-header">
+      <p class="section-label">— Bộ sưu tập —</p>
+      <h2 class="section-heading">Câu Chuyện Kể Bằng Ánh Mắt</h2>
+      <p class="section-desc">
+        Hàng nghìn bộ ảnh đã được thực hiện, mỗi bức ảnh là một tác phẩm
+        nghệ thuật độc đáo, không thể lặp lại.
+      </p>
+
+      <div class="home-bst__filters">
+        @for (filter of galleryFilters; track filter.id) {
+          <button
+            type="button"
+            class="home-bst__filter"
+            [class.active]="activeGalleryFilter === filter.id"
+            (click)="setGalleryFilter(filter.id)"
+          >
+            {{ filter.label }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="home-bst__grid">
+      @for (photo of filteredGalleryPhotos; track photo.image) {
+        <div class="home-bst__photo">
+          <img [src]="'assets/' + photo.image" [alt]="photo.alt" loading="lazy" />
+        </div>
+      }
+    </div>
+
+    <div class="home-bst__more">
+      <a routerLink="/gallery" class="package-card__btn">Xem toàn bộ bộ sưu tập →</a>
     </div>
   </div>
 </section>
 
-<!-- ===== 4. CTA ĐẶT LỊCH ===== -->
+<!-- ===== 5. CTA ĐẶT LỊCH ===== -->
 <section class="home-cta">
   <div class="container-custom home-cta__inner">
     <p class="home-cta__eyebrow">Bạn sẵn sàng chưa?</p>
     <h2 class="home-cta__heading">Lưu giữ từng kỷ niệm đẹp của bạn tại đây</h2>
-    <a routerLink="/booking" class="btn-primary-custom btn-primary-custom--lg">
-      Đặt lịch ngay
-      <span class="btn-primary-custom__icon-circle"><i class="bi bi-calendar-check"></i></span>
-    </a>
+    <div class="home-cta__form">
+      <app-booking-form />
+    </div>
   </div>
 </section>

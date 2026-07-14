@@ -1,35 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { FormsModule, NgForm } from '@angular/forms';
 import { DataService } from '../../shared/services/data.service';
 import { ConceptCardComponent, Concept } from '../../shared/components/concept-card/concept-card.component';
+import { BookingFormComponent } from '../../shared/components/booking-form/booking-form.component';
 
 @Component({
   selector: 'app-concepts',
   standalone: true,
-  imports: [RouterLink, FormsModule, ConceptCardComponent],
+  imports: [RouterLink, ConceptCardComponent, BookingFormComponent],
   templateUrl: './concepts.component.html',
   styleUrls: ['./concepts.component.scss']
 })
 export class ConceptsComponent implements OnInit {
-  /* Overview mode: true = show "129+ concept" hero + 6 category cards (default landing on /concepts).
+  /* Overview mode: true = show "100+ concept" hero + category cards (default landing on /concepts).
      false = show the filtered listing for a single category (/concepts?category=X). */
   showOverview = true;
   categoryCards: Concept[] = [];
 
   activeFilter = 'Tất cả';
   filteredConcepts: Concept[] = [];
-
-  /* Consultation form (overview mode) */
-  consultSubmitted = false;
-  consultData = {
-    name: '',
-    phone: '',
-    concept: '',
-    idea: '',
-    location: '',
-    note: ''
-  };
 
   constructor(
     public data: DataService,
@@ -38,17 +27,19 @@ export class ConceptsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.categoryCards = this.data.serviceCards.map(card => ({
-      id: card.queryCategory,
-      name: card.name,
-      category: card.queryCategory,
-      eyebrow: card.tagline,
-      description: card.description,
-      price: card.price,
-      priceNote: '',
-      image: card.image,
-      conceptCount: Number(card.conceptCount)
-    }));
+    this.categoryCards = this.data.serviceCards
+      .filter(card => card.name !== 'Bạn bè · Sinh nhật')
+      .map(card => ({
+        id: card.queryCategory,
+        name: card.name,
+        category: card.queryCategory,
+        eyebrow: card.tagline,
+        description: card.description,
+        price: card.price,
+        priceNote: '',
+        image: card.image,
+        conceptCount: Number(card.conceptCount)
+      }));
 
     this.route.queryParams.subscribe(params => {
       const cat = params['category'];
@@ -82,24 +73,8 @@ export class ConceptsComponent implements OnInit {
       'Couple': 'Hai người, một câu chuyện. Cho đôi đang yêu, đôi sắp cưới, đôi đã cùng nhau qua bao mùa. Bộ ảnh chung là cách giữ lại một chương yêu thương đẹp nhất.',
       'Gia đình': 'Từ hạt nhân đến ba thế hệ. Bé lớn nhanh lắm. Bà mỗi ngày một khác. Hôm nay là lúc để lưu lại câu chuyện của cả nhà — trước khi thời gian cuốn đi.',
       'Mẹ và con': 'Khoảnh khắc thiêng liêng nhất. Từ những ngày mang bầu đến lúc bé lớn dần — mỗi ánh nhìn, mỗi cái ôm đều đáng được giữ lại mãi mãi.',
-      'Bạn bè · Sinh nhật': 'Cột mốc đáng để ghi nhớ. Sinh nhật chẵn. Họp lớp. Tri kỷ 10 năm gặp lại. Những khoảnh khắc đáng được lưu giữ cùng những người bạn yêu quý.',
       'Áo dài': 'Áo dài Việt — cổ điển và hiện đại. Tà áo dài Việt tôn lên nét duyên của người phụ nữ Việt qua từng dáng vẻ, từ truyền thống đến cách tân.',
     };
     return descriptions[this.activeFilter] || '';
-  }
-
-  submitConsultation(form: NgForm) {
-    if (form.valid) {
-      this.consultSubmitted = true;
-      console.log('Consultation data:', this.consultData);
-      setTimeout(() => {
-        this.consultSubmitted = false;
-        form.resetForm();
-      }, 4000);
-    } else {
-      Object.keys(form.controls).forEach(key => {
-        form.controls[key].markAsTouched();
-      });
-    }
   }
 }

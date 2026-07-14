@@ -45,13 +45,13 @@ export interface Concept {
         <!-- Footer: price row + detail link -->
         <div class="concept-card__footer">
           <div class="concept-card__price-row">
-            <span class="concept-card__price-label">Giá từ</span>
+            <span class="concept-card__price-label">{{ categoryMode ? 'Giá từ' : 'Từ' }}</span>
             <strong class="concept-card__price-value">{{ concept.price }}</strong>
             @if (concept.conceptCount) {
               <span class="concept-card__count">· {{ concept.conceptCount }} concept</span>
             }
           </div>
-          <span class="concept-card__detail-link">Xem chi tiết →</span>
+          <span class="concept-card__detail-link">{{ categoryMode ? 'Xem chi tiết concept →' : 'Xem chi tiết →' }}</span>
         </div>
       </div>
     </a>

@@ -1,0 +1,55 @@
+@if (submitted) {
+  <div class="booking-form-widget__success">
+    <div class="booking-form-widget__success-icon">✓</div>
+    <h2>Đã gửi yêu cầu thành công!</h2>
+    <p>Ekip Ký Ức sẽ liên hệ với bạn trong vòng 24 giờ làm việc để xác nhận lịch chụp.</p>
+    <div class="booking-form-widget__success-actions">
+      <a routerLink="/" class="btn-primary-custom">Về trang chủ</a>
+      <a routerLink="/profile" class="btn-outline-custom">Theo dõi trạng thái</a>
+    </div>
+  </div>
+} @else {
+  <form #bookingForm="ngForm" (ngSubmit)="onSubmit(bookingForm)" class="booking-form">
+    @if (errorMessage) {
+      <div class="booking-form__error">{{ errorMessage }}</div>
+    }
+
+    <div class="booking-form__group">
+      <label>Họ và tên</label>
+      <input type="text" name="name" [(ngModel)]="bookingData.name"
+             class="booking-form__input" placeholder="VD: Nguyễn Thị Hoa" required />
+    </div>
+
+    <div class="booking-form__group">
+      <label>Số điện thoại</label>
+      <input type="tel" name="phone" [(ngModel)]="bookingData.phone"
+             class="booking-form__input" placeholder="VD: 0987654321" required pattern="[0-9]{10,11}" />
+    </div>
+
+    <div class="booking-form__group">
+      <label>Concept yêu thích</label>
+      <select name="concept" [(ngModel)]="bookingData.concept" class="booking-form__input" required>
+        <option value="">- Chọn dịch vụ -</option>
+        @for (cat of data.pricingCategories; track cat.id) {
+          <option [value]="cat.id">{{ cat.name }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="booking-form__group">
+      <label>Ý tưởng concept cụ thể (nếu có)</label>
+      <input type="text" name="idea" [(ngModel)]="bookingData.idea"
+             class="booking-form__input" placeholder="VD: Áo dài, Mẹ và con,..." />
+    </div>
+
+    <div class="booking-form__group">
+      <label>Ghi chú thêm (tuỳ chọn)</label>
+      <textarea name="note" [(ngModel)]="bookingData.note" class="booking-form__input booking-form__textarea"
+                rows="4" placeholder="VD: Chụp hình sinh nhật, chụp ảnh Tết,..."></textarea>
+    </div>
+
+    <button type="submit" class="booking-form__submit" [disabled]="!bookingForm.valid || loading">
+      {{ loading ? 'Đang gửi...' : 'Đặt lịch →' }}
+    </button>
+  </form>
+}
